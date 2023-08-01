@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-07-31T12:09:49 IST" name="Default suite" finished-at="2023-07-31T12:10:05 IST" duration-ms="16158">
+    <groups>
+    </groups>
+    <test started-at="2023-07-31T12:09:49 IST" name="Default test" finished-at="2023-07-31T12:10:05 IST" duration-ms="16158">
+      <class name="nimap.ntts.test.LoginPageValidation">
+        <test-method signature="openUrlInBrowser()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:09:49 IST" name="openUrlInBrowser" finished-at="2023-07-31T12:09:59 IST" duration-ms="10497" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openUrlInBrowser -->
+        <test-method signature="loginWithValidCredentials()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:09:59 IST" name="loginWithValidCredentials" finished-at="2023-07-31T12:10:01 IST" depends-on-methods="nimap.ntts.test.LoginPageValidation.openUrlInBrowser" duration-ms="1189" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWithValidCredentials -->
+        <test-method signature="loginSuccessfulMsgValidation()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:10:01 IST" name="loginSuccessfulMsgValidation" finished-at="2023-07-31T12:10:04 IST" depends-on-methods="nimap.ntts.test.LoginPageValidation.loginWithValidCredentials" duration-ms="3279" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginSuccessfulMsgValidation -->
+        <test-method signature="goToMastersMenu()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:10:04 IST" name="goToMastersMenu" finished-at="2023-07-31T12:10:04 IST" depends-on-methods="nimap.ntts.test.LoginPageValidation.loginSuccessfulMsgValidation" duration-ms="345" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- goToMastersMenu -->
+        <test-method signature="openUserSubMenu()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:10:04 IST" name="openUserSubMenu" finished-at="2023-07-31T12:10:05 IST" depends-on-methods="nimap.ntts.test.LoginPageValidation.goToMastersMenu" duration-ms="402" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openUserSubMenu -->
+        <test-method is-config="true" signature="closeCurrentBrowser()[pri:0, instance:nimap.ntts.test.LoginPageValidation@397fbdb]" started-at="2023-07-31T12:10:05 IST" name="closeCurrentBrowser" finished-at="2023-07-31T12:10:05 IST" duration-ms="298" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeCurrentBrowser -->
+      </class> <!-- nimap.ntts.test.LoginPageValidation -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
