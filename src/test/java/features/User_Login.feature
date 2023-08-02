@@ -42,4 +42,14 @@ Feature: Customer Portal Login
     And Verify OTP Message
     Then Close The Browser
     
+    Scenario: Verify Dashboard Calander
+    Given User select the browser
+    And User Currently is on Login Page
+    And User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    Then Click on Sign in button
+    When User Clicks on Dashboard Menu
+    And  User Select Current Date as Start Date in Calander
+    And User Select Next Date as End Date in Calander
+    Then Close The Browser
+    
    

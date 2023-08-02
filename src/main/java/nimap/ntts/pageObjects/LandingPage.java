@@ -34,12 +34,40 @@ public class LandingPage extends PageComponents {
 		return userSubMenu;
 	}
 	
-	
-	
 	@FindBy (css = "")
 	private WebElement logOutBtn;
 	
+	@FindBy(xpath = "//span[contains(text(),'Dashboard')]")
+	private WebElement dashboard;
+	public WebElement goDashboard() {
+		return dashboard;
+	}
+	
+	@FindBy(css = "#startDate")
+	private WebElement startDate;
+	public WebElement goToCalanderStartDate() {
+		return startDate;
+	}
+	
+	@FindBy(css = ".flatpickr-day.selected")
+	private WebElement selectCurrentStartDate;
+	public WebElement getSelectCurrentStartDate() {
+		return selectCurrentStartDate;
+	}
 
+	@FindBy(css = "#endDate")
+	private WebElement endDate;
+	public WebElement goToCalanderEndDate() {
+		return endDate;
+	}
+	
+	@FindBy(xpath = "//span[@class='flatpickr-day today selected']")
+	private WebElement selectNextEndDate;
+	public WebElement getSelectNextEndDate() {
+		return selectNextEndDate;
+	}
+	
+	
 	
 
 }

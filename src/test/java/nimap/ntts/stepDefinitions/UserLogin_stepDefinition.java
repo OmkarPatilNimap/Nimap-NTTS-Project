@@ -30,6 +30,9 @@ public class UserLogin_stepDefinition extends BaseTest {
 	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
 		driver = initializeDriver();
+		CL = new LoginPage(driver);
+		LP = new LandingPage(driver);
+		UE = new UserEmployeeListPage(driver);
 	}
 
 	@When("User is on NTTS login Portal")
@@ -58,7 +61,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify Login Success Outcome")
 	public void verify_login_success_outcome() throws InterruptedException {
-		LP = new LandingPage(driver);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(LP.getloginSuccText()));
 		String msg = LP.getloginSuccText().getText();
@@ -73,7 +75,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 	public void Logout_and_close_the_current_browser() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(LP.getloginSuccText()));
-		UE = new UserEmployeeListPage(driver);
 		UE.getUesrProfileImg().click();
 		UE.getLogOutBtn().click();
 		driver.close();
@@ -126,19 +127,16 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@Then("Close The Browser")
 	public void close_the_browser() {
-		// TODO Auto-generated method stub
 		driver.close();
 	}
 
 	@When("User clicks on forgot password link")
 	public void user_clicks_on_forgot_password_link() {
-		LoginPage CL = new LoginPage(driver);
 		CL.getForgotPassLink().click();
 	}
 
 	@And("Enter Email")
 	public void enter_email_and_click_on_send_otp() {
-		LoginPage CL = new LoginPage(driver);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(CL.goToEnterEmail()));
 		CL.goToEnterEmail().sendKeys(prop.getProperty("email"));
@@ -146,7 +144,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Click on send OTP Btn")
 	public void click_on_send_otp_btn() {
-		LoginPage CL = new LoginPage(driver);
 		CL.getSendOtpBtn().click();
 		CL.getOtpSendSuccMsg().getText();
 		System.out.println(CL.getOtpSendSuccMsg().getText());
@@ -154,7 +151,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify The OTP Popup")
 	public void verify_the_otp_popup() throws InterruptedException {
-		LoginPage CL = new LoginPage(driver);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(CL.getOtpSendSuccMsg()));
 		if (CL.getOtpSendSuccMsg().isDisplayed()) {
@@ -167,7 +163,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("User Enter Invalid OTP and New Password")
 	public void user_enter_invalid_otp_and_new_password() throws InterruptedException {
-		LoginPage CL = new LoginPage(driver);
 		for (int i = 1; i <= 6; i++) {
 			CL.getOtpBlocks().get(i - 1).sendKeys(prop.getProperty("otpBlock" + i));
 			Thread.sleep(200);
@@ -180,7 +175,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify OTP Message")
 	public void verify_otp_message() throws InterruptedException {
-		LoginPage CL = new LoginPage(driver);
 		Thread.sleep(200);
 		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
 //		else if(CL.getPassResetSuccMsg().isDisplayed()) {
@@ -190,13 +184,12 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("User clicks on Sign In With OTP Link")
 	public void user_clicks_on_sign_in_with_otp_link() {
-		LoginPage CL = new LoginPage(driver);
 		CL.getSignInWithOtpLnk().click();
 	}
 
 	@And("User Enter InValid OTP")
 	public void user_enter_in_valid_otp() throws InterruptedException {
-		LoginPage CL = new LoginPage(driver);
+		//LoginPage CL = new LoginPage(driver);
 		for (int i = 1; i <= 6; i++) {
 			CL.getOtpBlocks().get(i - 1).sendKeys(prop.getProperty("otpBlock" + i));
 			Thread.sleep(200);
@@ -204,4 +197,21 @@ public class UserLogin_stepDefinition extends BaseTest {
 		CL.getSignInBtn1().click();
 	}
 
+	@When("User Clicks on Dashboard Menu")
+	public void user_clicks_on_dashboard_menu() {
+		LP.goDashboard().click();
+	}
+
+	@When("User Select Current Date as Start Date in Calander")
+	public void user_select_current_date_as_start_date_in_calander() throws InterruptedException {
+		LP.goToCalanderStartDate().click();
+		LP.getSelectCurrentStartDate().click();
+	}
+
+	@When("User Select Next Date as End Date in Calander")
+	public void user_select_next_date_as_end_date_in_calander() throws InterruptedException {
+		LP.goToCalanderEndDate().click();
+		Thread.sleep(100);
+		LP.getSelectNextEndDate().click();
+	}
 }
