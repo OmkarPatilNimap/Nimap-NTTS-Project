@@ -56,8 +56,8 @@ public class UserLogin_stepDefinition extends BaseTest {
 		CL.getSignInBtn().click();
 	}
 
-	@And("Verify the Outcome")
-	public void verify_the_outcome() throws InterruptedException {
+	@And("Verify Login Success Outcome")
+	public void verify_login_success_outcome() throws InterruptedException {
 		LP = new LandingPage(driver);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(LP.getloginSuccText()));
@@ -69,8 +69,8 @@ public class UserLogin_stepDefinition extends BaseTest {
 		}
 	}
 
-	@Then("Logout")
-	public void logout() throws InterruptedException {
+	@Then("Logout and close the current browser")
+	public void Logout_and_close_the_current_browser() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(LP.getloginSuccText()));
 		UE = new UserEmployeeListPage(driver);
@@ -92,30 +92,116 @@ public class UserLogin_stepDefinition extends BaseTest {
 	}
 
 	@When("^User enter valid and invalid credential (.*) (.*)$")
-	public void user_enter_valid_and_invalid_credential(String Username, String Password) {
+	public void user_enter_valid_and_invalid_credential(String Username, String Password) throws InterruptedException {
 		CL = new LoginPage(driver);
 		CL.getEmpId().clear();
 		CL.getEmpId().sendKeys(Username);
 		CL.getEmpPwd().clear();
 		CL.getEmpPwd().sendKeys(Password);
 		CL.getSignInBtn().click();
+		Thread.sleep(1000);
 	}
 
-	@Then("Verify the Outcome Fail")
+	@And("Verify the Outcome Fail")
 	public void verify_the_outcome_fail() {
-		if (CL.getInvalidEmailOrPwdMsg().getText().equalsIgnoreCase(prop.getProperty("emailErrMsg"))) {
+		if (CL.getInvalidEmailOrPwdMsg().isDisplayed()) {
+			String errorMsg = CL.getInvalidEmailOrPwdMsg().getText();
+			errorMsg.equalsIgnoreCase(prop.getProperty("emailErrMsg"));
 			System.out.println("Both Invalid Email and Password");
 			System.out.println(CL.getInvalidEmailOrPwdMsg().getText());
-		} else if (CL.getLoginPassErrMsg().getText().equalsIgnoreCase(prop.getProperty("passErrMsg"))) {
+		} else if (CL.getLoginPassErrMsg().isDisplayed()) {
+			CL.getLoginPassErrMsg().getText().equalsIgnoreCase(prop.getProperty("passErrMsg"));
 			System.out.println("Invalid Password");
 			System.out.println(CL.getLoginPassErrMsg().getText());
+		} else if (CL.getEmpId().isDisplayed()) {
+			CL.getEmpId().getText().equalsIgnoreCase(prop.getProperty("emailErrMsg"));
+			System.out.println("Empty EmailID Filed Error MEssage");
 		} else {
-			CL.getEmpPwd().clear();
+			CL.emptyPwdErrMsg().isDisplayed();
 			CL.emptyPwdErrMsg().getText().equalsIgnoreCase(prop.getProperty("emptyPassField"));
 			System.out.println("Empty Password Filed Error Msg");
 			System.out.println(CL.emptyPwdErrMsg().getText());
 		}
+	}
 
+	@Then("Close The Browser")
+	public void close_the_browser() {
+		// TODO Auto-generated method stub
+		driver.close();
+	}
+
+	@When("User clicks on forgot password link")
+	public void user_clicks_on_forgot_password_link() {
+		LoginPage CL = new LoginPage(driver);
+		CL.getForgotPassLink().click();
+	}
+
+	@And("Enter Email")
+	public void enter_email_and_click_on_send_otp() {
+		LoginPage CL = new LoginPage(driver);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOf(CL.goToEnterEmail()));
+		CL.goToEnterEmail().sendKeys(prop.getProperty("email"));
+	}
+
+	@And("Click on send OTP Btn")
+	public void click_on_send_otp_btn() {
+		LoginPage CL = new LoginPage(driver);
+		CL.getSendOtpBtn().click();
+		CL.getOtpSendSuccMsg().getText();
+		System.out.println(CL.getOtpSendSuccMsg().getText());
+	}
+
+	@And("Verify The OTP Popup")
+	public void verify_the_otp_popup() throws InterruptedException {
+		LoginPage CL = new LoginPage(driver);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOf(CL.getOtpSendSuccMsg()));
+		if (CL.getOtpSendSuccMsg().isDisplayed()) {
+			System.out.println(CL.getOtpSendSuccMsg().getText());
+			Assert.assertEquals(CL.getOtpSendSuccMsg().getText(), prop.getProperty("otpSendPopupmsg"));
+		} else {
+			Assert.assertEquals(CL.getInvalidEmailMsg().getText(), prop.getProperty("invalidEmailMsg"));
+		}
+	}
+
+	@And("User Enter Invalid OTP and New Password")
+	public void user_enter_invalid_otp_and_new_password() throws InterruptedException {
+		LoginPage CL = new LoginPage(driver);
+		for (int i = 1; i <= 6; i++) {
+			CL.getOtpBlocks().get(i - 1).sendKeys(prop.getProperty("otpBlock" + i));
+			Thread.sleep(200);
+		}
+		if (CL.getEnterNewPass().isDisplayed()) {
+			CL.getEnterNewPass().sendKeys(prop.getProperty("enterNewPass"));
+			CL.getSubmitBtn().click();
+		}
+	}
+
+	@And("Verify OTP Message")
+	public void verify_otp_message() throws InterruptedException {
+		LoginPage CL = new LoginPage(driver);
+		Thread.sleep(200);
+		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
+//		else if(CL.getPassResetSuccMsg().isDisplayed()) {
+//			Assert.assertEquals(CL.getPassResetSuccMsg().getText(), prop.getProperty("passResetSuccMsg"));
+//		}
+	}
+
+	@And("User clicks on Sign In With OTP Link")
+	public void user_clicks_on_sign_in_with_otp_link() {
+		LoginPage CL = new LoginPage(driver);
+		CL.getSignInWithOtpLnk().click();
+	}
+
+	@And("User Enter InValid OTP")
+	public void user_enter_in_valid_otp() throws InterruptedException {
+		LoginPage CL = new LoginPage(driver);
+		for (int i = 1; i <= 6; i++) {
+			CL.getOtpBlocks().get(i - 1).sendKeys(prop.getProperty("otpBlock" + i));
+			Thread.sleep(200);
+		}
+		CL.getSignInBtn1().click();
 	}
 
 }

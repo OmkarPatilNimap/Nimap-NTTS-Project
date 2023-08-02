@@ -1,5 +1,7 @@
 package nimap.ntts.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,7 +29,6 @@ public class LoginPage extends PageComponents {
 	public WebElement getLoginEmailErrMsg() {
 		return loginEmailErrMsg;
 	}
-	
 	
 	@FindBy(css = "input[name='password']")
 	WebElement loginPass;
@@ -64,6 +65,11 @@ public class LoginPage extends PageComponents {
 	public WebElement getSignInBtn() {
 		return signinBtn;
 	}
+	@FindBy(css = ".btn")
+	WebElement signinBtn1;
+	public WebElement getSignInBtn1() {
+		return signinBtn1;
+	}
 
 	@FindBy(css = ".cursor-pointer")
 	WebElement eyeBtn;
@@ -83,6 +89,68 @@ public class LoginPage extends PageComponents {
 		return signInWithOtpLink;
 	}
 	
+	@FindBy(xpath = "//input[@placeholder='john@example.com']")
+	private WebElement enterEmail;
+	public WebElement goToEnterEmail() {
+		return enterEmail;
+	}
+	
+	@FindBy(css = ".btn")
+	private WebElement sendOtpBtn;
+	public WebElement getSendOtpBtn() {
+		return sendOtpBtn;
+	}
+	
+	@FindBy(xpath = "//h6[normalize-space()='OTP SENT!']")
+	private WebElement otpSendSuccMsg;
+	public WebElement getOtpSendSuccMsg() {
+		return otpSendSuccMsg;
+	}
+	
+	@FindBy(xpath = "//div[@role='status']")
+	private WebElement invalidEmailMsg;
+	public WebElement getInvalidEmailMsg() {
+		return invalidEmailMsg;
+	}
+	
+	@FindBy(xpath = "//input[@class='form-control']")
+	private WebElement enterNewPass;
+	public WebElement getEnterNewPass() {
+		return enterNewPass;
+	}
+	
+	@FindBy(css = ".auth-input")
+	private List<WebElement> otpBlocks;
+	public List<WebElement> getOtpBlocks() {
+		return otpBlocks;
+	}
+	
+	@FindBy(xpath = "//button[contains(text(),'Submit')]")
+	private WebElement submitBtn;
+	public WebElement getSubmitBtn() {
+		return submitBtn;
+	}
+	
+	@FindBy(xpath = "//div[@role='status']")
+	private WebElement invalidOtpMsg;
+	public WebElement getInvalidOtpMsg() {
+		return invalidOtpMsg;
+	}
+	
+	@FindBy(xpath = "//h6[contains(text(),'Password Changed Successfuly')]")
+	private WebElement passResetSuccMsg;
+	public WebElement getPassResetSuccMsg() {
+		return passResetSuccMsg;
+	}
+	//strong[normalize-space()='Please Login with New Password']
+	//strong[contains(text(),'Please Login with New Password')]
+	
+	
+	@FindBy(xpath = "//small[contains(text(),'Sign in with OTP')]")
+	private WebElement signInWithOtp;
+	public WebElement getSignInWithOtp() {
+		return signInWithOtp;
+	}
 	
 	
 	

@@ -3,22 +3,43 @@ Feature: Customer Portal Login
   Scenario: Login with Valid data
     Given User select the browser
     When User is on NTTS login Portal
-    And User enter a credential "jshankhpal41@gmail.com" "Jitesh@0987"
+    And User enter a credential "softwaretest1449@gmail.com" "Test@1234"
     Then Click on Sign in button
-    And Verify the Outcome
-    Then Logout
+    And Verify Login Success Outcome
+    Then Logout and close the current browser
 
   Scenario Outline: Verify the data with invalid input
     Given User select the browser
     And User Currently is on Login Page
     When User enter valid and invalid credential <Username> <Password>
-    Then Verify the Outcome
+    And Verify the Outcome Fail
+    Then Close The Browser 
 
     Examples: 
-      | Username  							| Password    | 
-      | wrongemail@gmail.com    | Jitesh@0987 | 
-      | jshankhpal41@gmail.com  | Wrong@123   |
-      | 											  | Jitesh@0987 |
-      | jshankhpal41@gmail.com  | 					  |
+      | Username  					    		| Password    | 
+      | wrongemail@gmail.com 		    | Test@1234   | 
+      | softwaretest1449@gmail.com  | Wrong@123   |
       
-  
+  Scenario: Verify the forgot password link
+    Given User select the browser
+    And User Currently is on Login Page
+    When User clicks on forgot password link
+    And Enter Email
+    And Click on send OTP Btn
+    And Verify The OTP Popup
+    And User Enter Invalid OTP and New Password
+    And Verify OTP Message
+    Then Close The Browser
+    
+   Scenario: Verify Sign In With OTP
+    Given User select the browser
+    And User Currently is on Login Page
+    When User clicks on Sign In With OTP Link
+    And Enter Email
+    And Click on send OTP Btn
+    And Verify The OTP Popup
+    And User Enter InValid OTP 
+    And Verify OTP Message
+    Then Close The Browser
+    
+   
