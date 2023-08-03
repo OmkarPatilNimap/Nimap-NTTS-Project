@@ -3,17 +3,18 @@ package nimap.ntts.stepDefinitions;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import nimap.ntts.pageObjects.DashboardPage;
 import nimap.ntts.pageObjects.LandingPage;
 import nimap.ntts.pageObjects.LoginPage;
 import nimap.ntts.pageObjects.UserEmployeeListPage;
@@ -26,6 +27,13 @@ public class UserLogin_stepDefinition extends BaseTest {
 	LoginPage CL;
 	LandingPage LP;
 	UserEmployeeListPage UE;
+	DashboardPage DP;
+	WebDriverWait wait;
+
+	@Given("User Initialize The Browser")
+	public void user_initialize_the_browser() {
+
+	}
 
 	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
@@ -33,18 +41,8 @@ public class UserLogin_stepDefinition extends BaseTest {
 		CL = new LoginPage(driver);
 		LP = new LandingPage(driver);
 		UE = new UserEmployeeListPage(driver);
-	}
-
-	@When("User is on NTTS login Portal")
-	public void user_is_on_ntts_login_portal() {
-		driver.get(goToNttsPage());
-		CL = new LoginPage(driver);
-		String url = driver.getCurrentUrl();
-		try {
-			Assert.assertEquals(url, prop.getProperty("url") + "login");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		DP = new DashboardPage(driver);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
 	@And("User enter a credential {string} {string}")
@@ -61,7 +59,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify Login Success Outcome")
 	public void verify_login_success_outcome() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(LP.getloginSuccText()));
 		String msg = LP.getloginSuccText().getText();
 		try {
@@ -73,14 +70,13 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@Then("Logout and close the current browser")
 	public void Logout_and_close_the_current_browser() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(LP.getloginSuccText()));
 		UE.getUesrProfileImg().click();
 		UE.getLogOutBtn().click();
 		driver.close();
 	}
 
-	@Given("User Currently is on Login Page")
+	@And("User Currently is on Login Page")
 	public void user_currently_is_on_login_page() throws IOException {
 		driver.get(goToNttsPage());
 		String url = driver.getCurrentUrl();
@@ -104,7 +100,8 @@ public class UserLogin_stepDefinition extends BaseTest {
 	}
 
 	@And("Verify the Outcome Fail")
-	public void verify_the_outcome_fail() {
+	public void verify_the_outcome_fail() throws InterruptedException {
+		Thread.sleep(200);
 		if (CL.getInvalidEmailOrPwdMsg().isDisplayed()) {
 			String errorMsg = CL.getInvalidEmailOrPwdMsg().getText();
 			errorMsg.equalsIgnoreCase(prop.getProperty("emailErrMsg"));
@@ -137,7 +134,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Enter Email")
 	public void enter_email_and_click_on_send_otp() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(CL.goToEnterEmail()));
 		CL.goToEnterEmail().sendKeys(prop.getProperty("email"));
 	}
@@ -151,7 +147,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify The OTP Popup")
 	public void verify_the_otp_popup() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(CL.getOtpSendSuccMsg()));
 		if (CL.getOtpSendSuccMsg().isDisplayed()) {
 			System.out.println(CL.getOtpSendSuccMsg().getText());
@@ -176,20 +171,21 @@ public class UserLogin_stepDefinition extends BaseTest {
 	@And("Verify OTP Message")
 	public void verify_otp_message() throws InterruptedException {
 		Thread.sleep(200);
+		wait.until(ExpectedConditions.visibilityOf(CL.getInvalidOtpMsg()));
 		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
 //		else if(CL.getPassResetSuccMsg().isDisplayed()) {
 //			Assert.assertEquals(CL.getPassResetSuccMsg().getText(), prop.getProperty("passResetSuccMsg"));
 //		}
 	}
 
-	@And("User clicks on Sign In With OTP Link")
+	@When("User clicks on Sign In With OTP Link")
 	public void user_clicks_on_sign_in_with_otp_link() {
 		CL.getSignInWithOtpLnk().click();
 	}
 
 	@And("User Enter InValid OTP")
 	public void user_enter_in_valid_otp() throws InterruptedException {
-		//LoginPage CL = new LoginPage(driver);
+		// LoginPage CL = new LoginPage(driver);
 		for (int i = 1; i <= 6; i++) {
 			CL.getOtpBlocks().get(i - 1).sendKeys(prop.getProperty("otpBlock" + i));
 			Thread.sleep(200);
@@ -197,21 +193,79 @@ public class UserLogin_stepDefinition extends BaseTest {
 		CL.getSignInBtn1().click();
 	}
 
+	// ===============================================Dashborad===========================================================
+
 	@When("User Clicks on Dashboard Menu")
 	public void user_clicks_on_dashboard_menu() {
+		LP = new LandingPage(driver);
+		DP = new DashboardPage(driver);
 		LP.goDashboard().click();
 	}
 
-	@When("User Select Current Date as Start Date in Calander")
-	public void user_select_current_date_as_start_date_in_calander() throws InterruptedException {
-		LP.goToCalanderStartDate().click();
-		LP.getSelectCurrentStartDate().click();
+	@When("User Select Highlited Date as a Start Date in Calander")
+	public void user_select_highlited_date_as_a_start_date_in_calander() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
+		DP.goToCalanderStartDate().click();
+		wait.until(ExpectedConditions.visibilityOf(DP.getSelectHighlitedStartDate()));
+		DP.getSelectHighlitedStartDate().click();
 	}
 
-	@When("User Select Next Date as End Date in Calander")
-	public void user_select_next_date_as_end_date_in_calander() throws InterruptedException {
-		LP.goToCalanderEndDate().click();
-		Thread.sleep(100);
-		LP.getSelectNextEndDate().click();
+	@When("User Select Today as an End Date in Calander")
+	public void user_select_today_date_as_an_end_date_in_calander() throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderEndDate()));
+		DP.goToCalanderEndDate().click();
+		wait.until(ExpectedConditions.visibilityOf(DP.getSelectNextEndDate()));
+		DP.getSelectNextEndDate().click();
 	}
+
+	@When("User is on Home Page {string} {string}")
+	public void user_is_on_home_page(String Username, String Password) {
+		driver.get(goToNttsPage());
+		CL.getEmpId().sendKeys(Username);
+		CL.getEmpPwd().sendKeys(Password);
+		CL.getSignInBtn().click();
+	}
+
+	@Then("User Select End Date Before Start Date in Calander")
+	public void user_select_end_date_before_start_date_in_calander() {
+		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
+		DP.goToCalanderEndDate().click();
+		wait.until(ExpectedConditions.visibilityOf(DP.getPreviousMonth()));
+		DP.getPreviousMonth().click();
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(DP.getSelectDateBeforeStartDate()));
+		} catch (TimeoutException e) {
+			System.out.println("Date is no Clickable");
+		}
+		Assert.assertFalse(DP.getSelectDateBeforeStartDate().isEnabled());
+		System.out.println("End Date is Not Selectable Before Start Date");
+	}
+
+	@When("User is on Home Page")
+	public void user_is_on_home_page() {
+		driver.navigate().refresh();
+	}
+
+	@Then("User Select Previous Month Date as a Start Date in Calander")
+	public void user_select_previous_month_date_as_a_start_date_in_calander() {
+		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
+		DP.goToCalanderStartDate().click();
+		wait.until(ExpectedConditions.visibilityOf(DP.getPreviousMonth()));
+		DP.getPreviousMonth().click();
+		wait.until(ExpectedConditions.visibilityOf(DP.getAnotherDate()));
+		DP.getAnotherDate().click();
+	}
+	
+	@Then("User Clicks on Top Rating Menu")
+	public void user_clicks_on_top_rating_menu() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("Verify Employee Records Sorted With Highest Rating at Top and Lowest Rating at Bottom")
+	public void verify_employee_records_sorted_with_highest_rating_at_top_and_lowest_rating_at_bottom() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
 }
