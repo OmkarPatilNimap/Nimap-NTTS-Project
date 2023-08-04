@@ -101,24 +101,28 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify the Outcome Fail")
 	public void verify_the_outcome_fail() throws InterruptedException {
-		Thread.sleep(200);
+		Thread.sleep(300);
 		if (CL.getInvalidEmailOrPwdMsg().isDisplayed()) {
 			String errorMsg = CL.getInvalidEmailOrPwdMsg().getText();
 			errorMsg.equalsIgnoreCase(prop.getProperty("emailErrMsg"));
 			System.out.println("Both Invalid Email and Password");
 			System.out.println(CL.getInvalidEmailOrPwdMsg().getText());
+			Thread.sleep(200);
 		} else if (CL.getLoginPassErrMsg().isDisplayed()) {
 			CL.getLoginPassErrMsg().getText().equalsIgnoreCase(prop.getProperty("passErrMsg"));
 			System.out.println("Invalid Password");
 			System.out.println(CL.getLoginPassErrMsg().getText());
+			Thread.sleep(200);
 		} else if (CL.getEmpId().isDisplayed()) {
 			CL.getEmpId().getText().equalsIgnoreCase(prop.getProperty("emailErrMsg"));
 			System.out.println("Empty EmailID Filed Error MEssage");
+			Thread.sleep(200);
 		} else {
 			CL.emptyPwdErrMsg().isDisplayed();
 			CL.emptyPwdErrMsg().getText().equalsIgnoreCase(prop.getProperty("emptyPassField"));
 			System.out.println("Empty Password Filed Error Msg");
 			System.out.println(CL.emptyPwdErrMsg().getText());
+			Thread.sleep(200);
 		}
 	}
 
@@ -170,7 +174,7 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	@And("Verify OTP Message")
 	public void verify_otp_message() throws InterruptedException {
-		Thread.sleep(200);
+		Thread.sleep(300);
 		wait.until(ExpectedConditions.visibilityOf(CL.getInvalidOtpMsg()));
 		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
 //		else if(CL.getPassResetSuccMsg().isDisplayed()) {
@@ -195,77 +199,9 @@ public class UserLogin_stepDefinition extends BaseTest {
 
 	// ===============================================Dashborad===========================================================
 
-	@When("User Clicks on Dashboard Menu")
-	public void user_clicks_on_dashboard_menu() {
-		LP = new LandingPage(driver);
-		DP = new DashboardPage(driver);
-		LP.goDashboard().click();
-	}
-
-	@When("User Select Highlited Date as a Start Date in Calander")
-	public void user_select_highlited_date_as_a_start_date_in_calander() throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
-		DP.goToCalanderStartDate().click();
-		wait.until(ExpectedConditions.visibilityOf(DP.getSelectHighlitedStartDate()));
-		DP.getSelectHighlitedStartDate().click();
-	}
-
-	@When("User Select Today as an End Date in Calander")
-	public void user_select_today_date_as_an_end_date_in_calander() throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderEndDate()));
-		DP.goToCalanderEndDate().click();
-		wait.until(ExpectedConditions.visibilityOf(DP.getSelectNextEndDate()));
-		DP.getSelectNextEndDate().click();
-	}
-
-	@When("User is on Home Page {string} {string}")
-	public void user_is_on_home_page(String Username, String Password) {
-		driver.get(goToNttsPage());
-		CL.getEmpId().sendKeys(Username);
-		CL.getEmpPwd().sendKeys(Password);
-		CL.getSignInBtn().click();
-	}
-
-	@Then("User Select End Date Before Start Date in Calander")
-	public void user_select_end_date_before_start_date_in_calander() {
-		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
-		DP.goToCalanderEndDate().click();
-		wait.until(ExpectedConditions.visibilityOf(DP.getPreviousMonth()));
-		DP.getPreviousMonth().click();
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(DP.getSelectDateBeforeStartDate()));
-		} catch (TimeoutException e) {
-			System.out.println("Date is no Clickable");
-		}
-		Assert.assertFalse(DP.getSelectDateBeforeStartDate().isEnabled());
-		System.out.println("End Date is Not Selectable Before Start Date");
-	}
-
-	@When("User is on Home Page")
-	public void user_is_on_home_page() {
-		driver.navigate().refresh();
-	}
-
-	@Then("User Select Previous Month Date as a Start Date in Calander")
-	public void user_select_previous_month_date_as_a_start_date_in_calander() {
-		wait.until(ExpectedConditions.visibilityOf(DP.goToCalanderStartDate()));
-		DP.goToCalanderStartDate().click();
-		wait.until(ExpectedConditions.visibilityOf(DP.getPreviousMonth()));
-		DP.getPreviousMonth().click();
-		wait.until(ExpectedConditions.visibilityOf(DP.getAnotherDate()));
-		DP.getAnotherDate().click();
-	}
-	
-	@Then("User Clicks on Top Rating Menu")
-	public void user_clicks_on_top_rating_menu() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-
-	@Then("Verify Employee Records Sorted With Highest Rating at Top and Lowest Rating at Bottom")
-	public void verify_employee_records_sorted_with_highest_rating_at_top_and_lowest_rating_at_bottom() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Enter Invalid Email")
+	public void enter_invalid_email() {
+		
 	}
 
 }

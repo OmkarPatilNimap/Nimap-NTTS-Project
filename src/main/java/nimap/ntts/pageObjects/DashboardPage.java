@@ -24,8 +24,8 @@ public class DashboardPage extends PageComponents{
 	}
 	
 	@FindBy(css = ".flatpickr-day.selected")
-	private WebElement selectHighlitedStartDate;
-	public WebElement getSelectHighlitedStartDate() {
+	private List<WebElement> selectHighlitedStartDate;
+	public List<WebElement> getSelectHighlitedStartDate() {
 		return selectHighlitedStartDate;
 	}
 
@@ -81,22 +81,28 @@ public class DashboardPage extends PageComponents{
 	}
 	//div[@class='sc-feUZmu eguvnT react-dataTable']//div[@id='row-0']
 	
-	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC fGWgCb brkkzl rdt_TableCell']")
-	private WebElement topRatingEmpNames;
-	public WebElement getTopRatingEmpNames() {
+	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC fGWgCb brkkzl rdt_TableCell'] [1]")
+	private List<WebElement> topRatingEmpNames;
+	public List<WebElement> getTopRatingEmpNames() {
 		return topRatingEmpNames;
 	}
 	
 	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC cLKIlv brkkzl rdt_TableCell']")
-	private WebElement topRatingMentorNames;
-	public WebElement getTopRatingMentorNames() {
+	private List<WebElement> topRatingMentorNames;
+	public List<WebElement> getTopRatingMentorNames() {
 		return topRatingMentorNames;
 	}
 	
 	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC jDFsip brkkzl rdt_TableCell']")
-	private WebElement topRatingTechnology;
-	public WebElement getTopRatingTechnology() {
+	private List<WebElement> topRatingTechnology;
+	public List<WebElement> getTopRatingTechnology() {
 		return topRatingTechnology;
+	}
+	
+	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC hrRBoj brkkzl rdt_TableCell']/span")
+	private List<WebElement> topRatingCol;
+	public List<WebElement> getTopRatingCol() {
+		return topRatingCol;
 	}
 	
 }
