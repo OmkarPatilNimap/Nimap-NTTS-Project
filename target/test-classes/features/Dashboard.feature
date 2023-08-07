@@ -1,6 +1,6 @@
 Feature: Dashboard Module
 
-  Scenario: Verify Dashboard Calander With Start Date and End Date
+   Scenario: Verify Dashboard Calander With Start Date and End Date
     Given User select the browser
     When User is on Home Page "softwaretest1449@gmail.com" "Test@1234"
     Then User Clicks on Dashboard Menu 
@@ -24,23 +24,24 @@ Feature: Dashboard Module
     And User Select End Date Before Start Date in Calander
     Then Close The Browser
     
-    #Scenario: Verify user at Top Rating Menu clicks on the First Employee Name
-    #Given User select the browser
-    #When User is on Home Page "softwaretest1449@gmail.com" "Test@1234"
-    #When User Clicks on Dashboard Menu
-    #And User Select Highlited Date as a Start Date in Calander
-    #Then User Select Today as an End Date in Calander
-    #And User Clicks on Top Rating Menu
-    #Then User clicks on First Employee Name
-    #And User Redirect to Selected Employee Details Page
-    #Then Close The Browser
-    #
-    #Scenario: Verify Top Rating Menu
-    #Given User select the browser
-    #When User is on Home Page "softwaretest1449@gmail.com" "Test@1234"
-    #When User Clicks on Dashboard Menu
-    #And User Select Highlited Date as a Start Date in Calander
-    #Then User Select Today as an End Date in Calander
-    #And User Clicks on Top Rating Menu
-    #Then Verify Employee Records Sorted With Highest Rating at Top and Lowest Rating at Bottom
-    #Then Close The Browser
+    Scenario: Verify user at Top Rating Menu clicks on the First Employee Name
+    Given User select the browser
+    When User is on Home Page "softwaretest1449@gmail.com" "Test@1234"
+    When User Clicks on Dashboard Menu
+    And User Select Highlited Date as a Start Date in Calander
+    Then User Select Today as an End Date in Calander
+    And User Clicks on Top Rating Menu
+    Then User clicks on First Employee Name
+    And User Redirect to Selected Employee Details Page
+    Then Close The Browser
+    
+    Scenario: Verify Top Rating Menu
+    Given User select the browser
+    When User is on Home Page "softwaretest1449@gmail.com" "Test@1234"
+    When User Clicks on Dashboard Menu
+    And User Select Highlited Date as a Start Date in Calander
+    Then User Select Today as an End Date in Calander
+    And User Clicks on Top Rating Menu
+    Then Verify Employee Records Sorted With Highest Rating at Top and Lowest Rating at Bottom
+    Then Close The Browser
+     

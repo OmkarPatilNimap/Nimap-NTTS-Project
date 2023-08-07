@@ -1,54 +1,44 @@
 package nimap.ntts.stepDefinitions;
 
-import org.junit.Assert;
+import java.io.IOException;
+import java.time.Duration;
 
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import nimap.ntts.pageObjects.DashboardPage;
+import nimap.ntts.pageObjects.LandingPage;
+import nimap.ntts.pageObjects.LoginPage;
+import nimap.ntts.pageObjects.UserEmployeeListPage;
 import nimap.ntts.pageObjects.User_EmployeeListPage;
 import nimap.ntts.testComponents.BaseTest;
 
 public class MastersEmployee extends BaseTest {
+	WebDriver driver;
+	LoginPage CL;
+	LandingPage LP;
+	UserEmployeeListPage UE;
+	DashboardPage DP;
 	User_EmployeeListPage EL;
+	WebDriverWait wait;
 	String firstEmpName;
 	String firstEmpEmail;
 	String firstEmpStatus;
 
-	// Change User to Employee
-	@When("User Clicks on Masters Menu and Select Employee Sub Menu")
-	public void user_clicks_on_masters_menu_and_select_employee_sub_menu() {
-		EL = new User_EmployeeListPage(driver);
-		EL.getMastersMenu().click();
-		EL.getUserMenu().click();
+	
+//	@Given("User select the browser")
+	public void user_select_the_browser() throws IOException {
+		driver = initializeDriver();
+		CL = new LoginPage(driver);
+		LP = new LandingPage(driver);
+		UE = new UserEmployeeListPage(driver);
+		DP = new DashboardPage(driver);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
-
-	@Then("Open Employee List Page")
-	public void open_employee_list_page() {
-		String actualTitle = EL.getEmpListTitle().getText();
-		Assert.assertEquals(actualTitle, "Employees List");
-	}
-
-	@Then("User Clicks on First Employee From the List")
-	public void user_clicks_on_first_employee_from_the_list() {
-		firstEmpName = EL.getEmpNames().get(0).getText();
-		firstEmpEmail = EL.getEmpEmails().get(0).getText();
-		firstEmpStatus = EL.getEmpStatus().get(0).getText();
-		EL.getEmpNames().get(0).click();
-	}
-
-	@Then("User Redirect To Selected Employee Detais Page")
-	public void user_redirect_to_selected_employee_detais_page() {
-		String empName = EL.getEmpDetailsTitle().getText();
-		Assert.assertEquals(empName, firstEmpName);
-	}
-
-	@Then("Verify The Employee Detais Are The Same As Selected Employee")
-	public void verify_the_employee_detais_are_the_same_as_selected_employee() {
-		String actualEmpName = EL.getEmpDetailsTitle().getText();
-		String ActualEmpEmail = EL.getEmpDetailsEmail().getText();
-		String ActualEmpStatus = EL.getEmpDetailsStatus().getText();
-		Assert.assertEquals(actualEmpName, firstEmpName);
-		Assert.assertEquals(ActualEmpEmail, firstEmpEmail);
-		Assert.assertEquals(ActualEmpStatus, firstEmpStatus);
-	}
+	
 
 }

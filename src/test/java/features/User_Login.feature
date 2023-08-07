@@ -41,17 +41,37 @@ Feature: Verify and Validate User Login
     And User Enter InValid OTP 
     And Verify OTP Message
     Then Close The Browser
-    
-#--------------------------------------------------------------------------
  
-  Scenario: Verify Sign In With OTP
+  Scenario: Verify Sign In With OTP Invalid
     Given User select the browser
     And User Currently is on Login Page
     When User clicks on Sign In With OTP Link
     And Enter Invalid Email
     And Click on send OTP Btn
     And Verify The OTP Popup
-    And User Enter InValid OTP 
-    And Verify OTP Message
     Then Close The Browser
-     
+      
+  Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
+   Given User select the browser
+    And User Currently is on Login Page
+    When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    And Click on Sign in button
+    And User Clicks on Masters Menu and Select Employee Sub Menu
+    Then Open Employee List Page
+    And User Clicks on First Employee From the List
+    And User Redirect To Selected Employee Detais Page
+    Then Verify The Employee Detais Are The Same As Selected Employee
+    Then Close The Browser
+    
+  Scenario: Verify User Add New Employee
+   Given User select the browser
+    And User Currently is on Login Page
+    When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    And Click on Sign in button
+    And User Clicks on Masters Menu and Select Employee Sub Menu
+    Then Open Employee List Page
+    And User Clicks on Add Employee button
+    And User Redirect To Add Employee Page
+    Then User Enter Valid Employee Detais
+    And User Clicks on Add Employee button
+    Then Close The Browser

@@ -24,6 +24,13 @@ public class User_EmployeeListPage extends PageComponents {
 		return mastersBtn;
 	}
 	
+	
+	@FindBy(xpath = "//h1")
+	private WebElement addEmpPageTitle;
+	public WebElement getAddEmpPageTitle() {
+		return addEmpPageTitle;
+	}
+	
 	@FindBy(xpath = "//h3")
 	private WebElement empListTitle;
 	public WebElement getEmpListTitle() {
@@ -48,7 +55,7 @@ public class User_EmployeeListPage extends PageComponents {
 		return empDetailsStatus;
 	}
 	
-	@FindBy(xpath = "a[class='d-flex align-items-center active'] span[class='menu-item text-truncate']")
+	@FindBy(css = "a[href='/apps/master/user']")
 	private WebElement userMenu;
 	public WebElement getUserMenu() {
 		return userMenu;
@@ -84,12 +91,18 @@ public class User_EmployeeListPage extends PageComponents {
 		return editEmpPageTitle;
 	}
 
-	@FindBy(css = "//div[@class='select__value-container select__value-container--is-multi select__value-container--has-value css-1dyz3mf']")
+	@FindBy(css = "div[display='flex'] div[class='select__value-container select__value-container--is-multi css-hlgwow'] div[class='select__input-container css-19bb58m']")
 	private WebElement rolesDropDown;
 	public WebElement getRolesDropDown() {
 		return rolesDropDown;
 	}
 
+	@FindBy(css = "div[class='select__value-container select__value-container--is-multi css-hlgwow'] div[class='select__input-container css-19bb58m']")
+	private WebElement technologyDropDown;
+	public WebElement getTechnologyDropDown() {
+		return technologyDropDown;
+	}
+	
 	@FindBy(css = "#name")
 	private WebElement EmpName;
 	public WebElement getEmpName() {
@@ -150,7 +163,7 @@ public class User_EmployeeListPage extends PageComponents {
 		return empAddress;
 	}
 	
-	@FindBy(css = "div[class='select__single-value css-1dimb5e-singleValue']")
+	@FindBy(css = "//div[@class='select__input-container css-19bb58m']")
 	private List<WebElement> genderDropDown;
 	public List<WebElement> getGenderDropDown() {
 		return genderDropDown;

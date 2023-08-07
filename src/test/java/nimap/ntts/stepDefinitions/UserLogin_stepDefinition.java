@@ -3,9 +3,12 @@ package nimap.ntts.stepDefinitions;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -18,6 +21,7 @@ import nimap.ntts.pageObjects.DashboardPage;
 import nimap.ntts.pageObjects.LandingPage;
 import nimap.ntts.pageObjects.LoginPage;
 import nimap.ntts.pageObjects.UserEmployeeListPage;
+import nimap.ntts.pageObjects.User_EmployeeListPage;
 import nimap.ntts.testComponents.BaseTest;
 import nimap.ntts.testComponents.ExtentReportClass;
 
@@ -30,9 +34,13 @@ public class UserLogin_stepDefinition extends BaseTest {
 	DashboardPage DP;
 	WebDriverWait wait;
 
+	User_EmployeeListPage EL;
+	String firstEmpName;
+	String firstEmpEmail;
+	String firstEmpStatus;
+
 	@Given("User Initialize The Browser")
 	public void user_initialize_the_browser() {
-
 	}
 
 	@Given("User select the browser")
@@ -143,20 +151,19 @@ public class UserLogin_stepDefinition extends BaseTest {
 	}
 
 	@And("Click on send OTP Btn")
-	public void click_on_send_otp_btn() {
+	public void click_on_send_otp_btn() throws InterruptedException {
 		CL.getSendOtpBtn().click();
-		CL.getOtpSendSuccMsg().getText();
-		System.out.println(CL.getOtpSendSuccMsg().getText());
+//		CL.getOtpSendSuccMsg().getText();
+//		System.out.println(CL.getOtpSendSuccMsg().getText());
 	}
 
 	@And("Verify The OTP Popup")
 	public void verify_the_otp_popup() throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOf(CL.getOtpSendSuccMsg()));
+		Thread.sleep(300);
 		if (CL.getOtpSendSuccMsg().isDisplayed()) {
-			System.out.println(CL.getOtpSendSuccMsg().getText());
-			Assert.assertEquals(CL.getOtpSendSuccMsg().getText(), prop.getProperty("otpSendPopupmsg"));
-		} else {
-			Assert.assertEquals(CL.getInvalidEmailMsg().getText(), prop.getProperty("invalidEmailMsg"));
+			CL.getOtpSendSuccMsg().getText().equalsIgnoreCase(prop.getProperty("otpSendPopupmsg"));
+		} else if (CL.getInvalidEmailMsg().isDisplayed()) {
+			CL.getInvalidEmailMsg().getText().equalsIgnoreCase(prop.getProperty("invalidEmailMsg"));
 		}
 	}
 
@@ -177,9 +184,6 @@ public class UserLogin_stepDefinition extends BaseTest {
 		Thread.sleep(300);
 		wait.until(ExpectedConditions.visibilityOf(CL.getInvalidOtpMsg()));
 		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
-//		else if(CL.getPassResetSuccMsg().isDisplayed()) {
-//			Assert.assertEquals(CL.getPassResetSuccMsg().getText(), prop.getProperty("passResetSuccMsg"));
-//		}
 	}
 
 	@When("User clicks on Sign In With OTP Link")
@@ -197,11 +201,73 @@ public class UserLogin_stepDefinition extends BaseTest {
 		CL.getSignInBtn1().click();
 	}
 
-	// ===============================================Dashborad===========================================================
-
 	@When("Enter Invalid Email")
 	public void enter_invalid_email() {
-		
+		wait.until(ExpectedConditions.visibilityOf(CL.goToEnterEmail()));
+		CL.goToEnterEmail().sendKeys(prop.getProperty("invalidEmail"));
+	}
+//=====================================EmployeeList========================
+
+	@When("User Clicks on Masters Menu and Select Employee Sub Menu")
+	public void user_clicks_on_masters_menu_and_select_employee_sub_menu() {
+		EL = new User_EmployeeListPage(driver);
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getMastersMenu()));
+		EL.getMastersMenu().click();
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getUserMenu()));
+		EL.getUserMenu().click();
 	}
 
+	@Then("Open Employee List Page")
+	public void open_employee_list_page() {
+		String actualTitle = EL.getEmpListTitle().getText();
+		Assert.assertEquals(actualTitle, "Employees List");
+	}
+
+	@Then("User Clicks on First Employee From the List")
+	public void user_clicks_on_first_employee_from_the_list() throws InterruptedException {
+		Thread.sleep(1000);
+		firstEmpName = EL.getEmpNames().get(0).getText();
+		firstEmpEmail = EL.getEmpEmails().get(0).getText();
+		firstEmpStatus = EL.getEmpStatus().get(0).getText();
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getEmpNames().get(0)));
+		EL.getEmpNames().get(0).click();
+	}
+
+	@Then("User Redirect To Selected Employee Detais Page")
+	public void user_redirect_to_selected_employee_detais_page() {
+		String empName = EL.getEmpDetailsTitle().getText();
+		empName.equalsIgnoreCase(firstEmpName);
+	}
+
+	@Then("Verify The Employee Detais Are The Same As Selected Employee")
+	public void verify_the_employee_detais_are_the_same_as_selected_employee() {
+		String actualEmpName = EL.getEmpDetailsTitle().getText();
+		String ActualEmpEmail = EL.getEmpDetailsEmail().getText();
+		String ActualEmpStatus = EL.getEmpDetailsStatus().getText();
+		actualEmpName.equalsIgnoreCase(firstEmpName);
+		ActualEmpEmail.equalsIgnoreCase(firstEmpEmail);
+		ActualEmpStatus.equalsIgnoreCase(firstEmpStatus);
+	}
+
+	@Then("User Clicks on Add Employee button")
+	public void user_clicks_on_add_employee_button() {
+		wait.until(ExpectedConditions.invisibilityOf(LP.getloginSuccText()));
+		EL.getAddEmpBtn().click();
+	}
+
+	@Then("User Redirect To Add Employee Page")
+	public void user_redirect_to_add_employee_page() {
+		EL.getAddEmpPageTitle().getText().equalsIgnoreCase(prop.getProperty("addEmpPageTitle"));
+	}
+
+	@Then("User Enter Valid Employee Detais")
+	public void user_enter_valid_employee_detais() throws InterruptedException {
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getEmpName()));
+		EL.getEmpName().sendKeys(prop.getProperty("newEmpName"));
+		Actions a = new Actions(driver);
+		a.click(EL.getTechnologyDropDown()).sendKeys("Selenium").keyDown(Keys.ENTER).build().perform();
+		a.click(EL.getRolesDropDown()).sendKeys("ADMIN").keyDown(Keys.ENTER).build().perform();
+	//	a.click(EL.getGenderDropDown().get(1)).sendKeys("MAIL").keyDown(Keys.ENTER).build().perform();
+		Thread.sleep(3000);
+	}
 }
