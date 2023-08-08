@@ -78,6 +78,67 @@ public class User_EmployeeListPage extends PageComponents {
 	public WebElement getAddEmpBtn() {
 		return addEmpBtn;
 	}
+	
+	@FindBy(xpath = "(//button[contains(text(),'Add Employee')]) [2]")
+	private WebElement addNewEmpBtn;
+	public WebElement getAddNewEmpBtn() {
+		return addNewEmpBtn;
+	}
+	
+	@FindBy(xpath = "//input[@value='Filter']")
+	private WebElement filterBtn;
+	public WebElement getFilterBtn() {
+		return filterBtn;
+	}
+	
+	@FindBy(css = "button[type='reset']")
+	private WebElement filterClearBtn;
+	public WebElement getFilterClearBtn() {
+		return filterClearBtn;
+	}
+	
+	
+	@FindBy(css = "button[type='submit']")
+	private WebElement filterSubmitBtn;
+	public WebElement getFilterSubmitBtn() {
+		return filterSubmitBtn;
+	}
+	
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m']) [1]")
+	private WebElement genderFilter;
+	public WebElement getGenderFilter() {
+		return genderFilter;
+	}
+	
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m']) [2]")
+	private WebElement statusFilter;
+	public WebElement getStatusFilter() {
+		return statusFilter;
+	}
+	
+	@FindBy(xpath = "//div[@role='status']")
+	private WebElement empAddedSuccessfullyMsg;
+	public WebElement getEmpAddedSuccessfullyMsg() {
+		return empAddedSuccessfullyMsg;
+	}
+	
+	@FindBy(xpath = "//div[@role='status']")
+	private WebElement empEditedErrorMsg;
+	public WebElement getEmpEditedErrorMsg() {
+		return empEditedErrorMsg;
+	}
+	
+	@FindBy(xpath = "(//div[@role='status']) [1]")
+	private WebElement empEditedSuccessfullyMsg;
+	public WebElement getEmpEditedSuccessfullyMsg() {
+		return empEditedSuccessfullyMsg;
+	}
+	
+	@FindBy(xpath = "//div[@role='status']")
+	private WebElement empIdAlreadyExistMsg;
+	public WebElement getEmpIdAlreadyExistMsg() {
+		return empIdAlreadyExistMsg;
+	}
 
 	@FindBy(xpath = "//div[@class='d-flex align-items-center permissions-actions']/button[@type='button']")
 	private List<WebElement> editEmpDetais;
@@ -108,6 +169,12 @@ public class User_EmployeeListPage extends PageComponents {
 	public WebElement getEmpName() {
 		return EmpName;
 	}
+	
+	@FindBy(css = "#email")
+	private WebElement EmpEmailId;
+	public WebElement getEmpEmailId() {
+		return EmpEmailId;
+	}
 
 	@FindBy(css = "#employeeNumber")
 	private WebElement EmpNum;
@@ -115,13 +182,13 @@ public class User_EmployeeListPage extends PageComponents {
 		return EmpNum;
 	}
 
-	@FindBy(css = "div[class='flatpickr-calendar animate arrowTop arrowLeft open'] select[aria-label='Month']")
+	@FindBy(xpath = "//div[@class='flatpickr-calendar animate open arrowLeft arrowBottom']//select[@aria-label='Month']")
 	private WebElement monthPickerDropDown;
 	public WebElement getMonthPickerDropDown() {
 		return monthPickerDropDown;
 	}
 
-	@FindBy(xpath = "//div[@class='numInputWrapper']")
+	@FindBy(xpath = "(//div[@class='numInputWrapper']) [1]")
 	private WebElement calanderYear;
 	public WebElement getCalanderYear() {
 		return calanderYear;
@@ -139,22 +206,29 @@ public class User_EmployeeListPage extends PageComponents {
 		return calanderForwardBtn;
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'24')]")
+	@FindBy(xpath = "//input[@name='dateOfJoining']")
 	private WebElement joiningDate;
 	public WebElement getJoiningDate() {
 		return joiningDate;
 	}
+	
+	@FindBy(xpath = "(//span[contains(text(),'20')]) [1]")
+	private WebElement selectFirstJoiningDate;
+	public WebElement getFirstJoiningDate() {
+		return selectFirstJoiningDate;
+	}
 
-	@FindBy(xpath = "//span[contains(text(),'18')]")
+	@FindBy(xpath = "//input[@name='benchDate']")
 	private WebElement benchDate;
 	public WebElement getBenchDate() {
 		return benchDate;
 	}
 
+	
 	@FindBy(css = "#phoneNumber")
-	private WebElement phoneNo;
-	public WebElement getPhoneNo() {
-		return phoneNo;
+	private WebElement empPhoneNo;
+	public WebElement getEmpPhoneNo() {
+		return empPhoneNo;
 	}
 	
 	@FindBy(css = "#addressLine1")
@@ -163,22 +237,28 @@ public class User_EmployeeListPage extends PageComponents {
 		return empAddress;
 	}
 	
-	@FindBy(css = "//div[@class='select__input-container css-19bb58m']")
-	private List<WebElement> genderDropDown;
-	public List<WebElement> getGenderDropDown() {
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m'])[3]")
+	private WebElement genderDropDown;
+	public WebElement getGenderDropDown() {
 		return genderDropDown;
 	}
 	
-	@FindBy(css = "div[class='select__single-value css-1dimb5e-singleValue']")
-	private List<WebElement> countryDropDown;
-	public List<WebElement> getCountryDropDown() {
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m'])[4]")
+	private WebElement countryDropDown;
+	public WebElement getCountryDropDown() {
 		return countryDropDown;
 	}
 	
-	@FindBy(css = "#react-select-54-placeholder")
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m'])[5]")
 	private WebElement stateDropDown;
 	public WebElement getStateDropDown() {
 		return stateDropDown;
+	}
+	
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m'])[6]")
+	private WebElement cityDropDown;
+	public WebElement getCityDropDown() {
+		return cityDropDown;
 	}
 	
 	@FindBy(xpath = "//span[@class='text-capitalize ']")
@@ -186,6 +266,27 @@ public class User_EmployeeListPage extends PageComponents {
 	public List<WebElement> getEmpStatus() {
 		return empStatus;
 	}
+	
+	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC bfnFLK brkkzl rdt_TableCell'] [2]")
+	private List<WebElement> empGender;
+	public List<WebElement> getEmpGender() {
+		return empGender;
+	}
+	
+	@FindBy(xpath = "//div[@class='select__value-container select__value-container--is-multi select__value-container--has-value css-1dyz3mf']//div[@class='select__input-container css-19bb58m']")
+	private WebElement editEmpDetailsRoles;
+	public WebElement getEditEmpDetailsRoles() {
+		return editEmpDetailsRoles;
+	}
+	
+	@FindBy(css = "button[type='submit']")
+	private WebElement editEmpDetailBtn;
+	public WebElement getEditEmpDetailBtn() {
+		return editEmpDetailBtn;
+	}
+	
+	
+	
 	
 	
 	

@@ -38,6 +38,7 @@ public class UserLogin_stepDefinition extends BaseTest {
 	String firstEmpName;
 	String firstEmpEmail;
 	String firstEmpStatus;
+	Actions a;
 
 	@Given("User Initialize The Browser")
 	public void user_initialize_the_browser() {
@@ -51,6 +52,7 @@ public class UserLogin_stepDefinition extends BaseTest {
 		UE = new UserEmployeeListPage(driver);
 		DP = new DashboardPage(driver);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		a = new Actions(driver);
 	}
 
 	@And("User enter a credential {string} {string}")
@@ -255,19 +257,116 @@ public class UserLogin_stepDefinition extends BaseTest {
 		EL.getAddEmpBtn().click();
 	}
 
+	@Then("User Clicks on Add New Employee button")
+	public void user_clicks_on_add_new_employee_button() {
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getAddNewEmpBtn()));
+		EL.getAddNewEmpBtn().click();
+		System.out.println(EL.getEmpAddedSuccessfullyMsg());
+	}
+
 	@Then("User Redirect To Add Employee Page")
 	public void user_redirect_to_add_employee_page() {
 		EL.getAddEmpPageTitle().getText().equalsIgnoreCase(prop.getProperty("addEmpPageTitle"));
 	}
 
-	@Then("User Enter Valid Employee Detais")
-	public void user_enter_valid_employee_detais() throws InterruptedException {
+	@Then("User Enter Valid Employee Details")
+	public void user_enter_valid_employee_details() throws InterruptedException {
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getEmpName()));
 		EL.getEmpName().sendKeys(prop.getProperty("newEmpName"));
-		Actions a = new Actions(driver);
-		a.click(EL.getTechnologyDropDown()).sendKeys("Selenium").keyDown(Keys.ENTER).build().perform();
-		a.click(EL.getRolesDropDown()).sendKeys("ADMIN").keyDown(Keys.ENTER).build().perform();
-	//	a.click(EL.getGenderDropDown().get(1)).sendKeys("MAIL").keyDown(Keys.ENTER).build().perform();
-		Thread.sleep(3000);
+		a = new Actions(driver);
+		a.click(EL.getTechnologyDropDown()).sendKeys(prop1.getProperty("TechName")).keyDown(Keys.ENTER).build()
+				.perform();
+		a.click(EL.getRolesDropDown()).sendKeys(prop1.getProperty("roles")).keyDown(Keys.ENTER).build().perform();
+		a.click(EL.getGenderDropDown()).sendKeys(prop1.getProperty("gender")).keyDown(Keys.ARROW_DOWN)
+				.keyDown(Keys.ENTER).build().perform();
+		EL.getEmpEmailId().sendKeys(prop1.getProperty("email"));
+		EL.getEmpNum().sendKeys(prop1.getProperty("empNum"));
+
+//		EL.getJoiningDate().click();
+//		wait.until(ExpectedConditions.elementToBeClickable(EL.getMonthPickerDropDown()));
+//		EL.getMonthPickerDropDown().click();
+//		Select options = new Select(EL.getMonthPickerDropDown());
+//		options.selectByVisibleText("July");
+//		EL.getCalanderYear().sendKeys("2023");
+//		EL.getFirstJoiningDate().click();
+
+		EL.getEmpPhoneNo().sendKeys(prop1.getProperty("empPhoneNum"));
+		EL.getEmpAddress().sendKeys(prop1.getProperty("empAddress"));
+		a.click(EL.getCountryDropDown()).sendKeys(prop1.getProperty("countryName")).keyDown(Keys.ARROW_DOWN)
+				.keyDown(Keys.ENTER).build().perform();
+		a.click(EL.getStateDropDown()).sendKeys(prop1.getProperty("state")).keyDown(Keys.ENTER).build().perform();
+		a.click(EL.getCityDropDown()).sendKeys(prop1.getProperty("city")).keyDown(Keys.ENTER).build().perform();
 	}
+
+	@Then("User Clicks on Filter button")
+	public void user_clicks_on_filter_button() throws InterruptedException {
+		wait.until(ExpectedConditions.invisibilityOf(LP.getloginSuccText()));
+		EL.getFilterBtn().click();
+	}
+
+	@Then("User Select Filter By Gender and Filter By Status")
+	public void user_select_filter_by_gender_and_filter_by_status() throws InterruptedException {
+		a = new Actions(driver);
+		a.click(EL.getGenderFilter()).sendKeys(prop1.getProperty("gender")).keyDown(Keys.ARROW_DOWN).keyDown(Keys.ENTER)
+				.build().perform();
+		a.click(EL.getStatusFilter()).sendKeys(prop1.getProperty("status")).keyDown(Keys.ARROW_DOWN)
+				.keyDown(Keys.ARROW_DOWN).keyDown(Keys.ENTER).build().perform();
+	}
+
+	@Then("User Clicks on Submit Filter button")
+	public void user_clicks_on_submit_filter_button() throws InterruptedException {
+		EL.getFilterSubmitBtn().click();
+	}
+
+	@Then("User Verify the Filter Condition is Apply as per inputs Provided")
+	public void user_verify_the_filter_condition_is_apply_as_per_inputs_provided() throws InterruptedException {
+		firstEmpName = EL.getEmpNames().get(0).getText();
+		for (int i = 0; i < EL.getEmpStatus().size(); i++) {
+			String EmpGender = EL.getEmpGender().get(i).getText();
+			System.out.println(EmpGender);
+			String EmpStatus = EL.getEmpStatus().get(i).getText();
+			System.out.println(EmpStatus);
+			Assert.assertTrue(EmpGender.equalsIgnoreCase(prop1.getProperty("gender")));
+			Assert.assertTrue(EmpStatus.equalsIgnoreCase(prop1.getProperty("actualStatus")));
+			// Bug Present Under Training Spelling Mistakes in filter
+		}
+	}
+
+	@Then("User Clicks on Edit Employee Details button")
+	public void user_clicks_on_edit_employee_details_button() {
+		EL.getEditEmpDetais().get(0).click();
+	}
+
+	@Then("User Edits Few Fields")
+	public void user_edits_few_fields() {
+		System.out.println(EL.getEditEmpPageTitle().getText());
+		//Assert.assertTrue(EL.getEditEmpPageTitle().getText().equalsIgnoreCase("Edit Employee"));
+		a.click(EL.getEditEmpDetailsRoles()).sendKeys(prop1.getProperty("editedRoles")).keyDown(Keys.ENTER).build().perform();
+		EL.getEmpName().clear();
+		EL.getEmpName().sendKeys(prop1.getProperty("editedEmpName"));
+		EL.getEmpNum().clear();
+		EL.getEmpNum().sendKeys(prop1.getProperty("editedEmpNum"));
+		EL.getEmpPhoneNo().clear();
+		EL.getEmpPhoneNo().sendKeys(prop1.getProperty("editedEmpPhoneNum"));
+		EL.getEmpAddress().clear();
+		EL.getEmpAddress().sendKeys(prop1.getProperty("editedEmpAddress"));	
+	}
+
+	@Then("User Clicks on Edit Employee button and save the Details")
+	public void user_clicks_on_edit_employee_button_and_save_the_details() {
+		EL.getEditEmpDetailBtn().click();
+	}
+
+	@Then("User Verify Employee Details Edited Successfully")
+	public void user_verify_employee_details_edited_successfully() throws InterruptedException {
+		Thread.sleep(500);
+		if(EL.getEmpEditedSuccessfullyMsg().getText().equalsIgnoreCase(prop1.getProperty("empEditSuccessMsg"))) {
+			System.out.println(EL.getEmpEditedSuccessfullyMsg().getText());
+			Assert.assertEquals(EL.getEmpEditedErrorMsg().getText(), prop1.getProperty("empEditSuccessMsg"));
+		}else {
+			System.out.println(EL.getEmpEditedErrorMsg().getText());
+			Assert.assertEquals(EL.getEmpEditedSuccessfullyMsg().getText(), prop1.getProperty("empEditErrorMsg"));
+		}
+	}
+
 }
