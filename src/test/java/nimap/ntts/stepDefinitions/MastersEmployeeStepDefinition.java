@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.time.Duration;
 
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.en.Given;
@@ -16,8 +19,9 @@ import nimap.ntts.pageObjects.LoginPage;
 import nimap.ntts.pageObjects.UserEmployeeListPage;
 import nimap.ntts.pageObjects.User_EmployeeListPage;
 import nimap.ntts.testComponents.BaseTest;
+import nimap.ntts.testComponents.TestContextSetup;
 
-public class MastersEmployee extends BaseTest {
+public class MastersEmployeeStepDefinition extends BaseTest {
 	WebDriver driver;
 	LoginPage CL;
 	LandingPage LP;
@@ -25,20 +29,28 @@ public class MastersEmployee extends BaseTest {
 	DashboardPage DP;
 	User_EmployeeListPage EL;
 	WebDriverWait wait;
+	TestContextSetup tcs;
+	Actions a;
+	
 	String firstEmpName;
 	String firstEmpEmail;
 	String firstEmpStatus;
 
+	public MastersEmployeeStepDefinition(TestContextSetup tcs) {
+		this.tcs=tcs;
+	}
 	
 //	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
-		driver = initializeDriver();
-		CL = new LoginPage(driver);
-		LP = new LandingPage(driver);
-		UE = new UserEmployeeListPage(driver);
-		DP = new DashboardPage(driver);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		tcs.driver = initializeDriver();
+		CL = new LoginPage(tcs.driver);
+		LP = new LandingPage(tcs.driver);
+		UE = new UserEmployeeListPage(tcs.driver);
+		DP = new DashboardPage(tcs.driver);
+		wait = new WebDriverWait(tcs.driver, Duration.ofSeconds(10));
+		a = new Actions(tcs.driver);
 	}
 	
 
+	
 }

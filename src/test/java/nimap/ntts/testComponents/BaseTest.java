@@ -35,7 +35,6 @@ public class BaseTest {
 		FileInputStream fis1 = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\main\\java\\nimap\\ntts\\resources\\AddNewEmployeeDetails.properties");
 		prop1.load(fis1);
-		
 		String browserName = prop.getProperty("browser");
 		if (browserName.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
@@ -73,7 +72,7 @@ public class BaseTest {
                   
 	}
 	
-	@AfterClass(alwaysRun=true)
+	//@AfterClass(alwaysRun=true)
 	public void closeCurrentBrowser() {
 		driver.close();
 	}

@@ -1,5 +1,6 @@
 Feature: Verify and Validate User Login 
 
+@UserLoginTest
   Scenario: Login with Valid data
     Given User select the browser
     When User Currently is on Login Page
@@ -8,6 +9,7 @@ Feature: Verify and Validate User Login
     And Verify Login Success Outcome
     Then Logout and close the current browser
 
+@UserLoginTest
   Scenario Outline: Verify the data with invalid input
     Given User select the browser
     And User Currently is on Login Page
@@ -19,7 +21,8 @@ Feature: Verify and Validate User Login
       | Username  					    		| Password    | 
       | wrongemail@gmail.com 		    | Test@1234   | 
       | softwaretest1449@gmail.com  | Wrong@123   |
-      
+    
+@UserLoginTest  
   Scenario: Verify the forgot password link
     Given User select the browser
     And User Currently is on Login Page
@@ -31,6 +34,7 @@ Feature: Verify and Validate User Login
     And Verify OTP Message
     Then Close The Browser
     
+@UserLoginTest
   Scenario: Verify Sign In With OTP
     Given User select the browser
     And User Currently is on Login Page
@@ -41,13 +45,14 @@ Feature: Verify and Validate User Login
     And User Enter InValid OTP 
     And Verify OTP Message
     Then Close The Browser
- 
-  #Scenario: Verify Sign In With OTP Invalid
-    #Given User select the browser
-    #And User Currently is on Login Page
-    #When User clicks on Sign In With OTP Link
-    #And Enter Invalid Email
-    #And Click on send OTP Btn
-    #And Verify The OTP Popup
-    #Then Close The Browser
+
+@UserLoginTest  
+  Scenario: Verify Sign In With OTP Invalid
+    Given User select the browser
+    And User Currently is on Login Page
+    When User clicks on Sign In With OTP Link
+    And Enter Invalid Email
+    And Click on send OTP Btn
+    And Verify The OTP Popup After User Enter Invalid mail
+    Then Close The Browser
       

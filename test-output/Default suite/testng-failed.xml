@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="nimap.ntts.test.LoginPageValidation">
+      <class name="cucumberOptions.TestRunner">
         <methods>
-          <include name="userLogout"/>
-          <include name="closeCurrentBrowser"/>
+          <include name="setUpClass"/>
+          <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="0 1 2 3 4 5"/>
         </methods>
-      </class> <!-- nimap.ntts.test.LoginPageValidation -->
+      </class> <!-- cucumberOptions.TestRunner -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
