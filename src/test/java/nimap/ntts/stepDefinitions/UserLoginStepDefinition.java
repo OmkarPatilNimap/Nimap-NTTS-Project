@@ -3,13 +3,16 @@ package nimap.ntts.stepDefinitions;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -31,16 +34,19 @@ public class UserLoginStepDefinition extends BaseTest {
 	DashboardPage DP;
 	WebDriverWait wait;
 	TestContextSetup tcs;
+	JavascriptExecutor js;
 
 	User_EmployeeListPage EL;
 	String firstEmpName;
 	String firstEmpEmail;
 	String firstEmpStatus;
 	Actions a;
+	int rows;
 
 	public UserLoginStepDefinition(TestContextSetup tcs) {
-		this.tcs=tcs;
+		this.tcs = tcs;
 	}
+
 	@Given("User Initialize The Browser")
 	public void user_initialize_the_browser() {
 	}
@@ -96,7 +102,7 @@ public class UserLoginStepDefinition extends BaseTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("UserIson Loginprotal");
+		System.out.println("User is on Login Protal");
 	}
 
 	@When("^User enter valid and invalid credential (.*) (.*)$")
@@ -126,12 +132,12 @@ public class UserLoginStepDefinition extends BaseTest {
 			Thread.sleep(200);
 		} else if (CL.getEmpId().isDisplayed()) {
 			CL.getEmpId().getText().equalsIgnoreCase(prop.getProperty("emailErrMsg"));
-			System.out.println("Empty EmailID Filed Error MEssage");
+			System.out.println("Empty EmailId Failed Error MEssage");
 			Thread.sleep(200);
 		} else {
 			CL.emptyPwdErrMsg().isDisplayed();
 			CL.emptyPwdErrMsg().getText().equalsIgnoreCase(prop.getProperty("emptyPassField"));
-			System.out.println("Empty Password Filed Error Msg");
+			System.out.println("Empty Password Failed Error Msg");
 			System.out.println(CL.emptyPwdErrMsg().getText());
 			Thread.sleep(200);
 		}
@@ -169,11 +175,11 @@ public class UserLoginStepDefinition extends BaseTest {
 			CL.getInvalidEmailMsg().getText().equalsIgnoreCase(prop.getProperty("invalidEmailMsg"));
 		}
 	}
-	
+
 	@And("Verify The OTP Popup After User Enter Invalid mail")
 	public void verify_the_otp_popup_after_user_enter_invalid_mail() throws InterruptedException {
 		Thread.sleep(300);
-			CL.getInvalidEmailMsg().getText().equalsIgnoreCase(prop.getProperty("invalidEmailMsg"));
+		CL.getInvalidEmailMsg().getText().equalsIgnoreCase(prop.getProperty("invalidEmailMsg"));
 	}
 
 	@And("User Enter Invalid OTP and New Password")
@@ -215,9 +221,9 @@ public class UserLoginStepDefinition extends BaseTest {
 		wait.until(ExpectedConditions.visibilityOf(CL.goToEnterEmail()));
 		CL.goToEnterEmail().sendKeys(prop.getProperty("invalidEmail"));
 	}
-	
-	//================================DashBoard================================
-	
+
+	// ================================DashBoard================================
+
 	@When("User Clicks on Dashboard Menu")
 	public void user_clicks_on_dashboard_menu() {
 		LP = new LandingPage(driver);
@@ -232,7 +238,8 @@ public class UserLoginStepDefinition extends BaseTest {
 		Thread.sleep(300);
 		DP.goToCalanderStartDate().click();
 		wait.until(ExpectedConditions.elementToBeClickable(DP.getSelectHighlitedStartDate().get(0)));
-		DP.getSelectHighlitedStartDate().get(0).click();;
+		DP.getSelectHighlitedStartDate().get(0).click();
+		;
 	}
 
 	@When("User Select Today as an End Date in Calander")
@@ -290,25 +297,25 @@ public class UserLoginStepDefinition extends BaseTest {
 	public void verify_employee_records_sorted_with_highest_rating_at_top_and_lowest_rating_at_bottom() {
 		wait.until(ExpectedConditions.visibilityOfAllElements(DP.getTopRatingCol()));
 		int rows = DP.getTopRatingCol().size();
-		String highestRating = DP.getTopRatingCol().get(0).getText(); 
+		String highestRating = DP.getTopRatingCol().get(0).getText();
 		highestRating = highestRating.substring(1, highestRating.length() - 1);
 		int highestRatingInt = Integer.parseInt(highestRating);
 		String lowestRating = DP.getTopRatingCol().get(rows - 1).getText();
 		lowestRating = lowestRating.substring(1, lowestRating.length() - 1);
 		int lowestRatingInt = Integer.parseInt(highestRating);
-		if(highestRatingInt==lowestRatingInt) {
+		if (highestRatingInt == lowestRatingInt) {
 			System.out.println("All Employess Rating are Equal");
-		} else if(highestRatingInt>lowestRatingInt){
+		} else if (highestRatingInt > lowestRatingInt) {
 			System.out.println("All Employess Ratings are In Decending Order");
-		}else {
+		} else {
 			System.out.println("All Employess Ratings are In Ascending Order");
 		}
-		Assert.assertTrue(highestRatingInt>=lowestRatingInt);
+		Assert.assertTrue(highestRatingInt >= lowestRatingInt);
 //		String LastEmpName = DP.getTopRatingEmpNames().get(rows - 1).getText();
 //		String LastMentorName = DP.getTopRatingMentorNames().get(rows-1).getText();
 //		String LastTechName = DP.getTopRatingTechnology().get(rows-1).getText();		
 	}
-	
+
 	@Then("User clicks on First Employee Name")
 	public void user_clicks_on_first_employee_name() {
 		String FirstEmpName = DP.getTopRatingEmpNames().get(0).getText();
@@ -319,11 +326,10 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Then("User Redirect to Selected Employee Details Page")
 	public void user_redirect_to_selected_employee_details_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
 	}
 
-	
 //=====================================EmployeeList========================
 
 	@When("User Clicks on Masters Menu and Select Employee Sub Menu")
@@ -339,6 +345,49 @@ public class UserLoginStepDefinition extends BaseTest {
 	public void open_employee_list_page() {
 		String actualTitle = EL.getEmpListTitle().getText();
 		Assert.assertEquals(actualTitle, "Employees List");
+	}
+
+	@Then("User Clicks on Active Employee Slider")
+	public void user_clicks_on_active_employee_slider() {
+		EL.getActiveEmpSlider().click();
+	}
+
+	@Then("User Scroll Down and Clicks on Show First {int} Entries")
+	public void user_scroll_down_and_clicks_on_show_first_entries(Integer int1) throws InterruptedException {
+		Thread.sleep(3000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,250)");
+		rows = EL.getEmpNames().size();
+		System.out.println("No of Rows Before Pagenation in Employee List : " + rows);
+		Select options = new Select(EL.getShowListDropDown());
+		options.selectByValue("25");
+		rows = EL.getEmpNames().size();
+		System.out.println("No of Rows After Pagenation in Employee List : " + rows);
+	}
+
+	@Then("User Scroll Up and Verify The {int} Rows Are Loaded in Employee List")
+	public void user_scroll_up_and_verify_the_rows_are_loaded_in_employee_list(Integer int1) {
+		js.executeScript("window.scrollBy(250,0)");
+		if (rows <= 25) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	@Then("User Type Existing Employee Name and Click on Search button")
+	public void user_type_existing_employee_name_and_click_on_search_button() {
+		EL.getSearchTextBox().sendKeys(prop.getProperty("existingEmpName"));
+	}
+
+	@Then("Only one Search Entry is Available Verify the Actual Searched Name With Available Employee Search Name")
+	public void only_one_search_entry_is_available_verify_the_actual_searched_name_with_available_employee_search_name() {
+		wait.until(ExpectedConditions.visibilityOf(EL.getEmpNames().get(0)));
+		String actualSearchedName = prop.getProperty("existingEmpName");
+		String availableName = EL.getEmpNames().get(0).getText();
+		System.out.println("Name Searched In Search Box : " + actualSearchedName);
+		System.out.println("Name After Searched : " + availableName);
+		Assert.assertEquals(availableName, actualSearchedName);
 	}
 
 	@Then("User Clicks on First Employee From the List")
@@ -374,10 +423,15 @@ public class UserLoginStepDefinition extends BaseTest {
 	}
 
 	@Then("User Clicks on Add New Employee button")
-	public void user_clicks_on_add_new_employee_button() {
+	public void user_clicks_on_add_new_employee_button() throws InterruptedException {
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getAddNewEmpBtn()));
 		EL.getAddNewEmpBtn().click();
-		System.out.println(EL.getEmpAddedSuccessfullyMsg());
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.visibilityOf(EL.getEmpAddedSuccMsg()));
+		String actualSuccMsg = EL.getEmpAddedSuccMsg().getText();
+		String expectedSuccMsg = prop1.getProperty("userAddedSuccMsg");
+		Assert.assertEquals(actualSuccMsg, expectedSuccMsg);
+		//System.out.println(EL.getEmpAddedSuccessfullyMsg());
 	}
 
 	@Then("User Redirect To Add Employee Page")
@@ -387,11 +441,14 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Then("User Enter Valid Employee Details")
 	public void user_enter_valid_employee_details() throws InterruptedException {
+		Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getEmpName()));
-		EL.getEmpName().sendKeys(prop.getProperty("newEmpName"));
+		EL.getEmpName().sendKeys(prop1.getProperty("empName"));
 		a = new Actions(driver);
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getTechnologyDropDown()));
 		a.click(EL.getTechnologyDropDown()).sendKeys(prop1.getProperty("TechName")).keyDown(Keys.ENTER).build()
 				.perform();
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getRolesDropDown()));
 		a.click(EL.getRolesDropDown()).sendKeys(prop1.getProperty("roles")).keyDown(Keys.ENTER).build().perform();
 		a.click(EL.getGenderDropDown()).sendKeys(prop1.getProperty("gender")).keyDown(Keys.ARROW_DOWN)
 				.keyDown(Keys.ENTER).build().perform();
@@ -447,17 +504,33 @@ public class UserLoginStepDefinition extends BaseTest {
 			// Bug Present Under Training Spelling Mistakes in filter
 		}
 	}
+	
+	@Then("User Search Newly Added Employee")
+	public void user_search_newly_added_employee() {
+		EL.getSearchTextBox().sendKeys(prop1.getProperty("empName"));
+	}
 
+	@Then("User Search Newly Edited Employee Name")
+	public void user_search_newly_edited_employee_name() {
+		EL.getSearchTextBox().sendKeys(prop1.getProperty("editedEmpName"));
+	}
+	
 	@Then("User Clicks on Edit Employee Details button")
 	public void user_clicks_on_edit_employee_details_button() {
+		wait.until(ExpectedConditions.visibilityOf(EL.getEmpNames().get(0)));
+		String newlyAddedEmpName = EL.getEmpNames().get(0).getText();
+		System.out.println(newlyAddedEmpName);
+		Assert.assertEquals(newlyAddedEmpName, prop1.getProperty("empName"));
 		EL.getEditEmpDetais().get(0).click();
 	}
 
 	@Then("User Edits Few Fields")
 	public void user_edits_few_fields() {
 		System.out.println(EL.getEditEmpPageTitle().getText());
-		//Assert.assertTrue(EL.getEditEmpPageTitle().getText().equalsIgnoreCase("Edit Employee"));
-		a.click(EL.getEditEmpDetailsRoles()).sendKeys(prop1.getProperty("editedRoles")).keyDown(Keys.ENTER).build().perform();
+		// Assert.assertTrue(EL.getEditEmpPageTitle().getText().equalsIgnoreCase("Edit
+		// Employee"));
+		a.click(EL.getEditEmpDetailsRoles()).sendKeys(prop1.getProperty("editedRoles")).keyDown(Keys.ENTER).build()
+				.perform();
 		EL.getEmpName().clear();
 		EL.getEmpName().sendKeys(prop1.getProperty("editedEmpName"));
 		EL.getEmpNum().clear();
@@ -465,7 +538,7 @@ public class UserLoginStepDefinition extends BaseTest {
 		EL.getEmpPhoneNo().clear();
 		EL.getEmpPhoneNo().sendKeys(prop1.getProperty("editedEmpPhoneNum"));
 		EL.getEmpAddress().clear();
-		EL.getEmpAddress().sendKeys(prop1.getProperty("editedEmpAddress"));	
+		EL.getEmpAddress().sendKeys(prop1.getProperty("editedEmpAddress"));
 	}
 
 	@Then("User Clicks on Edit Employee button and save the Details")
@@ -476,13 +549,34 @@ public class UserLoginStepDefinition extends BaseTest {
 	@Then("User Verify Employee Details Edited Successfully")
 	public void user_verify_employee_details_edited_successfully() throws InterruptedException {
 		Thread.sleep(500);
-		if(EL.getEmpEditedSuccessfullyMsg().getText().equalsIgnoreCase(prop1.getProperty("empEditSuccessMsg"))) {
+		//div[contains(text(),'User Updated successfully')]
+		if (EL.getEmpEditedSuccessfullyMsg().getText().equalsIgnoreCase(prop1.getProperty("empEditSuccessMsg"))) {
 			System.out.println(EL.getEmpEditedSuccessfullyMsg().getText());
-			Assert.assertEquals(EL.getEmpEditedErrorMsg().getText(), prop1.getProperty("empEditSuccessMsg"));
-		}else {
+			Assert.assertEquals(EL.getEmpEditedSuccessfullyMsg().getText(), prop1.getProperty("empEditSuccessMsg"));
+		} else {
 			System.out.println(EL.getEmpEditedErrorMsg().getText());
-			Assert.assertEquals(EL.getEmpEditedSuccessfullyMsg().getText(), prop1.getProperty("empEditErrorMsg"));
+			Assert.assertEquals(EL.getEmpEditedErrorMsg().getText(), prop1.getProperty("empEditErrorMsg"));
 		}
+	}
+	
+	@Then("User Clicks on Delete Employee button")
+	public void user_clicks_on_delete_employee_button() throws InterruptedException {
+	   wait.until(ExpectedConditions.elementToBeClickable(EL.getDeleteEmpBtns().get(0)));
+		EL.getDeleteEmpBtns().get(0).click();
+		Thread.sleep(500);
+		String actualWarningMsg = EL.getDeleteWarningMsg().getText();
+		String expectedWarningMsg = prop1.getProperty("deleteEmpWarningMsg");
+		Assert.assertEquals(actualWarningMsg, expectedWarningMsg);
+		EL.getConfirmDeleteBtn().click();
+	}
+
+	@Then("User Search Newly Added Employee and Verify Employee Deleted Successfully")
+	public void user_search_newly_added_employee_and_verify_employee_deleted_successfully() {
+	   wait.until(ExpectedConditions.visibilityOf(EL.getDeletedSuccessfullyMsg()));
+		String empDeletedSuccMsg =  EL.getDeletedSuccessfullyMsg().getText();
+		String expectedEmpDeletedSuccMsg = prop1.getProperty("empDeletedSuccMsg");
+		Assert.assertEquals(empDeletedSuccMsg, expectedEmpDeletedSuccMsg);
+		 System.out.println(empDeletedSuccMsg);
 	}
 
 }

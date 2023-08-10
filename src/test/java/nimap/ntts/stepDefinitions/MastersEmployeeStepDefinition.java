@@ -3,16 +3,10 @@ package nimap.ntts.stepDefinitions;
 import java.io.IOException;
 import java.time.Duration;
 
-import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import nimap.ntts.pageObjects.DashboardPage;
 import nimap.ntts.pageObjects.LandingPage;
 import nimap.ntts.pageObjects.LoginPage;

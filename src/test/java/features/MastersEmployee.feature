@@ -1,6 +1,7 @@
 Feature: Verify and Validate Masters Employee
 
-Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
+		@EmployeeListVerificationTest
+	Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
    Given User select the browser
     And User Currently is on Login Page
     When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
@@ -12,7 +13,35 @@ Scenario: Verify Empplyee List when User Clicks on First Employee then User Will
     Then Verify The Employee Detais Are The Same As Selected Employee
     Then Close The Browser
     
-  Scenario: Verify User Add New Employee
+    @EmployeeListVerificationTest
+	Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
+   Given User select the browser
+    And User Currently is on Login Page
+    When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    And Click on Sign in button
+    And User Clicks on Masters Menu and Select Employee Sub Menu
+    Then Open Employee List Page
+    And User Clicks on Active Employee Slider
+    Then User Scroll Down and Clicks on Show First 25 Entries
+    And User Scroll Up and Verify The 25 Rows Are Loaded in Employee List
+    Then Close The Browser
+    
+    
+     @EmployeeListVerificationTest
+	Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
+   Given User select the browser
+    And User Currently is on Login Page
+    When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    And Click on Sign in button
+    And User Clicks on Masters Menu and Select Employee Sub Menu
+    Then Open Employee List Page
+    And User Clicks on Active Employee Slider
+    Then User Type Existing Employee Name and Click on Search button
+    And Only one Search Entry is Available Verify the Actual Searched Name With Available Employee Search Name
+    Then Close The Browser
+    
+    @EmployeeListVerificationTest  
+  Scenario: Verify when User Add New Employee
    Given User select the browser
     And User Currently is on Login Page
     When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
@@ -25,7 +54,8 @@ Scenario: Verify Empplyee List when User Clicks on First Employee then User Will
     And User Clicks on Add New Employee button
     Then Close The Browser
     
-    Scenario: Verify User Apply Filter Condition
+    @EmployeeListVerificationTest
+  Scenario: Verify when User Apply Filter Condition
    Given User select the browser
     And User Currently is on Login Page
     When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
@@ -38,15 +68,31 @@ Scenario: Verify Empplyee List when User Clicks on First Employee then User Will
     And User Verify the Filter Condition is Apply as per inputs Provided
     Then Close The Browser
     
-    Scenario: Verify User Can Edit and Save Employee Details
+    @EmployeeListVerificationTest
+  Scenario: Verify User Can Edit and Save Employee Details
    Given User select the browser
     And User Currently is on Login Page
     When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
     And Click on Sign in button
     And User Clicks on Masters Menu and Select Employee Sub Menu
     Then Open Employee List Page
+    And User Search Newly Added Employee
     And User Clicks on Edit Employee Details button
     And User Edits Few Fields
     Then User Clicks on Edit Employee button and save the Details
     And User Verify Employee Details Edited Successfully
     Then Close The Browser
+    
+    @EmployeeListVerificationTest
+  Scenario: Verify User Can Search, Delete Employee, and Verify Employee Deleted Successfully
+   Given User select the browser
+    And User Currently is on Login Page
+    When User enter a credential "softwaretest1449@gmail.com" "Test@1234"
+    And Click on Sign in button
+    And User Clicks on Masters Menu and Select Employee Sub Menu
+    Then Open Employee List Page
+    And User Search Newly Edited Employee Name
+    And User Clicks on Delete Employee button
+    And User Search Newly Added Employee and Verify Employee Deleted Successfully
+   Then Close The Browser
+    

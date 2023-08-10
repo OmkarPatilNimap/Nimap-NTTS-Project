@@ -116,19 +116,19 @@ public class User_EmployeeListPage extends PageComponents {
 		return statusFilter;
 	}
 	
-	@FindBy(xpath = "//div[@role='status']")
-	private WebElement empAddedSuccessfullyMsg;
-	public WebElement getEmpAddedSuccessfullyMsg() {
-		return empAddedSuccessfullyMsg;
-	}
+//	@FindBy(xpath = "//div[@role='status']")
+//	private WebElement empAddedSuccessfullyMsg;
+//	public WebElement getEmpAddedSuccessfullyMsg() {
+//		return empAddedSuccessfullyMsg;
+//	}
 	
-	@FindBy(xpath = "//div[@role='status']")
+	@FindBy(xpath = "//div[contains(text(),'Roles already assigned to the user')]")
 	private WebElement empEditedErrorMsg;
 	public WebElement getEmpEditedErrorMsg() {
 		return empEditedErrorMsg;
 	}
 	
-	@FindBy(xpath = "(//div[@role='status']) [1]")
+	@FindBy(xpath = "//div[contains(text(),'User Updated successfully')]")
 	private WebElement empEditedSuccessfullyMsg;
 	public WebElement getEmpEditedSuccessfullyMsg() {
 		return empEditedSuccessfullyMsg;
@@ -152,13 +152,13 @@ public class User_EmployeeListPage extends PageComponents {
 		return editEmpPageTitle;
 	}
 
-	@FindBy(css = "div[display='flex'] div[class='select__value-container select__value-container--is-multi css-hlgwow'] div[class='select__input-container css-19bb58m']")
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m']) [2]")
 	private WebElement rolesDropDown;
 	public WebElement getRolesDropDown() {
 		return rolesDropDown;
 	}
 
-	@FindBy(css = "div[class='select__value-container select__value-container--is-multi css-hlgwow'] div[class='select__input-container css-19bb58m']")
+	@FindBy(xpath = "(//div[@class='select__input-container css-19bb58m']) [1]")
 	private WebElement technologyDropDown;
 	public WebElement getTechnologyDropDown() {
 		return technologyDropDown;
@@ -285,9 +285,60 @@ public class User_EmployeeListPage extends PageComponents {
 		return editEmpDetailBtn;
 	}
 	
+	@FindBy(css = "#rows-per-page")
+	private WebElement showListDropDown;
+	public WebElement getShowListDropDown() {
+		return showListDropDown;
+	}
+	
+	@FindBy(xpath = "//div[contains(text(),'Active Employees')]")
+	private WebElement activeEmpSlider;
+	public WebElement getActiveEmpSlider() {
+		return activeEmpSlider;
+	}
 	
 	
+	@FindBy(xpath = "//div[contains(text(),'Deleted Employees')]")
+	private WebElement deletedEmpSlider;
+	public WebElement getDeletedEmpSlider() {
+		return deletedEmpSlider;
+	}
 	
+	@FindBy(css = "#search-permission")
+	private WebElement searchTextBox;
+	public WebElement getSearchTextBox() {
+		return searchTextBox;
+	}
+	
+	@FindBy(xpath = "//button[@class='btn btn-icon actionHover btn btn-transparent btn-sm'] [2]")
+	private List<WebElement> deleteEmpBtns;
+	public List<WebElement> getDeleteEmpBtns() {
+		return deleteEmpBtns;
+	}
+	
+	@FindBy(xpath = "//button[@class='me-1 btn btn-primary']")
+	private WebElement confirmDeleteBtn;
+	public WebElement getConfirmDeleteBtn() {
+		return confirmDeleteBtn;
+	}
+	
+	@FindBy(xpath = "//div[@class='alert-body']")
+	private WebElement deleteWarningMsg;
+	public WebElement getDeleteWarningMsg() {
+		return deleteWarningMsg;
+	}
+	
+	@FindBy(xpath = "//div[contains(text(),'User Deleted successfully')]")
+	private WebElement deletedSuccessfullyMsg;
+	public WebElement getDeletedSuccessfullyMsg() {
+		return deletedSuccessfullyMsg;
+	}
+	
+	@FindBy(xpath = "//div[contains(text(),'User Added successfully')]")
+	private WebElement empAddedSuccessfullyMsg;
+	public WebElement getEmpAddedSuccMsg() {
+		return empAddedSuccessfullyMsg;
+	}
 	
 	
 }
