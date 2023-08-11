@@ -35,16 +35,16 @@ public class MastersEmployeeStepDefinition extends BaseTest {
 	}
 	
 //	@Given("User select the browser")
-	public void user_select_the_browser() throws IOException {
-		tcs.driver = initializeDriver();
-		CL = new LoginPage(tcs.driver);
-		LP = new LandingPage(tcs.driver);
-		UE = new UserEmployeeListPage(tcs.driver);
-		DP = new DashboardPage(tcs.driver);
-		wait = new WebDriverWait(tcs.driver, Duration.ofSeconds(10));
-		a = new Actions(tcs.driver);
-	}
-	
+//	public void user_select_the_browser() throws IOException {
+//		tcs.driver = initializeDriver();
+//		CL = new LoginPage(tcs.driver);
+//		LP = new LandingPage(tcs.driver);
+//		UE = new UserEmployeeListPage(tcs.driver);
+//		DP = new DashboardPage(tcs.driver);
+//		wait = new WebDriverWait(tcs.driver, Duration.ofSeconds(10));
+//		a = new Actions(tcs.driver);
+//	}
+//	
 
 	
 }

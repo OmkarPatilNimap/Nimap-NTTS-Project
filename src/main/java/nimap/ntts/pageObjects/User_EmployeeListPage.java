@@ -24,7 +24,6 @@ public class User_EmployeeListPage extends PageComponents {
 		return mastersBtn;
 	}
 	
-	
 	@FindBy(xpath = "//h1")
 	private WebElement addEmpPageTitle;
 	public WebElement getAddEmpPageTitle() {

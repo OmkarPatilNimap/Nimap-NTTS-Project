@@ -10,7 +10,7 @@ Feature: Verify and Validate User Login
     Then Logout and close the current browser
 
 @UserLoginTest
-  Scenario Outline: Verify the data with invalid input
+  Scenario Outline: Verify the Login with invalid input
     Given User select the browser
     And User Currently is on Login Page
     When User enter valid and invalid credential <Username> <Password>

@@ -1,21 +1,21 @@
 package nimap.ntts.testComponents;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.IOException;
 
-import nimap.ntts.pageObjects.DashboardPage;
-import nimap.ntts.pageObjects.LandingPage;
-import nimap.ntts.pageObjects.LoginPage;
-import nimap.ntts.pageObjects.UserEmployeeListPage;
-import nimap.ntts.pageObjects.User_EmployeeListPage;
+import org.openqa.selenium.WebDriver;
+
+import nimap.ntts.pageObjects.PageObjectManager;
 
 public class TestContextSetup {
 
 	public WebDriver driver;
-	public LoginPage CL;
-	public LandingPage LP;
-	public UserEmployeeListPage UE;
-	public DashboardPage DP;
-	public WebDriverWait wait;
-	public User_EmployeeListPage EL;
+	
+	public BaseTest baseTest;
+	public PageObjectManager pageObjectManager;
+	
+	public TestContextSetup() throws IOException
+	{
+		baseTest = new BaseTest();
+		//pageObjectManager = new PageObjectManager(baseTest.initializeDriver());
+	}
 }

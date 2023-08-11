@@ -25,9 +25,7 @@ import nimap.ntts.pageObjects.User_EmployeeListPage;
 import nimap.ntts.testComponents.BaseTest;
 import nimap.ntts.testComponents.TestContextSetup;
 
-//@Listeners(ExtentReportClass.class)
 public class UserLoginStepDefinition extends BaseTest {
-	WebDriver driver;
 	LoginPage CL;
 	LandingPage LP;
 	UserEmployeeListPage UE;
@@ -35,7 +33,6 @@ public class UserLoginStepDefinition extends BaseTest {
 	WebDriverWait wait;
 	TestContextSetup tcs;
 	JavascriptExecutor js;
-
 	User_EmployeeListPage EL;
 	String firstEmpName;
 	String firstEmpEmail;
@@ -43,13 +40,19 @@ public class UserLoginStepDefinition extends BaseTest {
 	Actions a;
 	int rows;
 
+
 	public UserLoginStepDefinition(TestContextSetup tcs) {
 		this.tcs = tcs;
+//		DP = tcs.pageObjectManager.getDashboardPage();
+//		LP = tcs.pageObjectManager.getLandingPage();
+//		CL = tcs.pageObjectManager.getLoginPage();
+//		UE = tcs.pageObjectManager.getUserEmployeeListPage();
+//		EL = tcs.pageObjectManager.getUser_EmployeeListPage();
 	}
 
-	@Given("User Initialize The Browser")
-	public void user_initialize_the_browser() {
-	}
+//	@Given("User Initialize The Browser")
+//	public void user_initialize_the_browser() {
+//	}
 
 	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
@@ -139,7 +142,7 @@ public class UserLoginStepDefinition extends BaseTest {
 			CL.emptyPwdErrMsg().getText().equalsIgnoreCase(prop.getProperty("emptyPassField"));
 			System.out.println("Empty Password Failed Error Msg");
 			System.out.println(CL.emptyPwdErrMsg().getText());
-			Thread.sleep(200);
+			Thread.sleep(300);
 		}
 	}
 
@@ -196,7 +199,7 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@And("Verify OTP Message")
 	public void verify_otp_message() throws InterruptedException {
-		Thread.sleep(400);
+		Thread.sleep(800);
 		wait.until(ExpectedConditions.visibilityOf(CL.getInvalidOtpMsg()));
 		Assert.assertEquals(CL.getInvalidOtpMsg().getText(), prop.getProperty("otpInvalidMsg"));
 	}
@@ -431,7 +434,7 @@ public class UserLoginStepDefinition extends BaseTest {
 		String actualSuccMsg = EL.getEmpAddedSuccMsg().getText();
 		String expectedSuccMsg = prop1.getProperty("userAddedSuccMsg");
 		Assert.assertEquals(actualSuccMsg, expectedSuccMsg);
-		//System.out.println(EL.getEmpAddedSuccessfullyMsg());
+		// System.out.println(EL.getEmpAddedSuccessfullyMsg());
 	}
 
 	@Then("User Redirect To Add Employee Page")
@@ -504,7 +507,7 @@ public class UserLoginStepDefinition extends BaseTest {
 			// Bug Present Under Training Spelling Mistakes in filter
 		}
 	}
-	
+
 	@Then("User Search Newly Added Employee")
 	public void user_search_newly_added_employee() {
 		EL.getSearchTextBox().sendKeys(prop1.getProperty("empName"));
@@ -514,7 +517,7 @@ public class UserLoginStepDefinition extends BaseTest {
 	public void user_search_newly_edited_employee_name() {
 		EL.getSearchTextBox().sendKeys(prop1.getProperty("editedEmpName"));
 	}
-	
+
 	@Then("User Clicks on Edit Employee Details button")
 	public void user_clicks_on_edit_employee_details_button() {
 		wait.until(ExpectedConditions.visibilityOf(EL.getEmpNames().get(0)));
@@ -548,9 +551,8 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Then("User Verify Employee Details Edited Successfully")
 	public void user_verify_employee_details_edited_successfully() throws InterruptedException {
-		Thread.sleep(500);
-		//div[contains(text(),'User Updated successfully')]
-		if (EL.getEmpEditedSuccessfullyMsg().getText().equalsIgnoreCase(prop1.getProperty("empEditSuccessMsg"))) {
+		Thread.sleep(300);
+		if (EL.getEmpEditedSuccessfullyMsg().isDisplayed()) {
 			System.out.println(EL.getEmpEditedSuccessfullyMsg().getText());
 			Assert.assertEquals(EL.getEmpEditedSuccessfullyMsg().getText(), prop1.getProperty("empEditSuccessMsg"));
 		} else {
@@ -558,10 +560,10 @@ public class UserLoginStepDefinition extends BaseTest {
 			Assert.assertEquals(EL.getEmpEditedErrorMsg().getText(), prop1.getProperty("empEditErrorMsg"));
 		}
 	}
-	
+
 	@Then("User Clicks on Delete Employee button")
 	public void user_clicks_on_delete_employee_button() throws InterruptedException {
-	   wait.until(ExpectedConditions.elementToBeClickable(EL.getDeleteEmpBtns().get(0)));
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getDeleteEmpBtns().get(0)));
 		EL.getDeleteEmpBtns().get(0).click();
 		Thread.sleep(500);
 		String actualWarningMsg = EL.getDeleteWarningMsg().getText();
@@ -572,11 +574,31 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Then("User Search Newly Added Employee and Verify Employee Deleted Successfully")
 	public void user_search_newly_added_employee_and_verify_employee_deleted_successfully() {
-	   wait.until(ExpectedConditions.visibilityOf(EL.getDeletedSuccessfullyMsg()));
-		String empDeletedSuccMsg =  EL.getDeletedSuccessfullyMsg().getText();
+		wait.until(ExpectedConditions.visibilityOf(EL.getDeletedSuccessfullyMsg()));
+		String empDeletedSuccMsg = EL.getDeletedSuccessfullyMsg().getText();
 		String expectedEmpDeletedSuccMsg = prop1.getProperty("empDeletedSuccMsg");
 		Assert.assertEquals(empDeletedSuccMsg, expectedEmpDeletedSuccMsg);
-		 System.out.println(empDeletedSuccMsg);
+		System.out.println(empDeletedSuccMsg);
+	}
+
+	@Then("User Clicks on Deleted Employee Slider")
+	public void user_clicks_on_deleted_employee_slider() {
+		EL.getDeletedEmpSlider().click();
+	}
+
+	@Then("User Type Recently Deleted Employee Name and Click on Search button")
+	public void user_type_recently_deleted_employee_name_and_click_on_search_button() {
+		EL.getSearchTextBox().sendKeys(prop1.getProperty("editedEmpName"));
+	}
+
+	@Then("Verify Search Entry is Available in Deleted Employee Page Verify the Actual Searched Name With Available Employee Search Name")
+	public void verify_search_entry_is_available_in_deleted_employee_page_verify_the_actual_searched_name_with_available_employee_search_name() {
+		wait.until(ExpectedConditions.visibilityOf(EL.getEmpNames().get(0)));
+		String actualSearchedName = prop1.getProperty("editedEmpName");
+		String availableName = EL.getEmpNames().get(0).getText();
+		System.out.println("Name Searched In Search Box : " + actualSearchedName);
+		System.out.println("Name After Searched : " + availableName);
+		Assert.assertEquals(availableName, actualSearchedName);
 	}
 
 }

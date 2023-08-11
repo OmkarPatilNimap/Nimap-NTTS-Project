@@ -1,233 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="13" passed="12" failed="1" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-08-10T16:17:41 IST" name="Default suite" finished-at="2023-08-10T16:21:21 IST" duration-ms="220149">
+  <suite started-at="2023-08-11T15:43:48 IST" name="Default suite" finished-at="2023-08-11T15:44:03 IST" duration-ms="15308">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.FailedTestRunner@623a8092]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2023-08-10T16:17:41 IST" name="Default test" finished-at="2023-08-10T16:21:21 IST" duration-ms="220149">
-      <class name="cucumberOptions.TestNGTestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:17:41 IST" name="setUpClass" finished-at="2023-08-10T16:17:43 IST" duration-ms="2031" status="PASS">
+    <test started-at="2023-08-11T15:43:48 IST" name="Default test" finished-at="2023-08-11T15:44:03 IST" duration-ms="15308">
+      <class name="cucumberOptions.FailedTestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.FailedTestRunner@623a8092]" started-at="2023-08-11T15:43:48 IST" name="setUpClass" finished-at="2023-08-11T15:43:49 IST" duration-ms="1353" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@565030b7]]>
+                <![CDATA[org.testng.TestRunner@d1c5cf2]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:17:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:18:02 IST" duration-ms="19565" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:18:02 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:18:18 IST" duration-ms="15989" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:18:18 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:18:32 IST" duration-ms="13575" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:18:32 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:19:00 IST" duration-ms="28008" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify when User Add New Employee"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:19:00 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:19:18 IST" duration-ms="18212" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify when User Apply Filter Condition"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:19:18 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:19:50 IST" duration-ms="31587" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify User Can Edit and Save Employee Details"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.openqa.selenium.NoSuchElementException">
-            <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(text(),'Roles already assigned to the user')]"}
-  (Session info: chrome=115.0.5790.171)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.10.0', revision: 'c14d967899'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.8'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [0bdacdea154d7804dac0227925d74c8a, findElement {using=xpath, value=//div[contains(text(),'Roles already assigned to the user')]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.171, chrome: {chromedriverVersion: 115.0.5790.170 (cc0d30c2ca5..., userDataDir: C:\Users\Nimap\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:64826}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64826/devtoo..., se:cdpVersion: 115.0.5790.171, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 0bdacdea154d7804dac0227925d74c8a]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(text(),'Roles already assigned to the user')]"}
-  (Session info: chrome=115.0.5790.171)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.10.0', revision: 'c14d967899'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.8'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [0bdacdea154d7804dac0227925d74c8a, findElement {using=xpath, value=//div[contains(text(),'Roles already assigned to the user')]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.171, chrome: {chromedriverVersion: 115.0.5790.170 (cc0d30c2ca5..., userDataDir: C:\Users\Nimap\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:64826}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64826/devtoo..., se:cdpVersion: 115.0.5790.171, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 0bdacdea154d7804dac0227925d74c8a
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:199)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:132)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:51)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:531)
-at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:350)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
-at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
-at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy29.getText(Unknown Source)
-at nimap.ntts.stepDefinitions.UserLoginStepDefinition.user_verify_employee_details_edited_successfully(UserLoginStepDefinition.java:557)
-at ✽.User Verify Employee Details Edited Successfully(file:///C:/Users/Nimap/eclipse-workspace/com-nimap-ntts/src/test/java/features/MastersEmployee.feature:83)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:19:50 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:20:12 IST" duration-ms="21864" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify User Can Search, Delete Employee, and Verify Employee Deleted Successfully"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate Masters Employee"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:20:12 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:20:25 IST" duration-ms="13092" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Login with Valid data"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate User Login"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:20:25 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:20:34 IST" duration-ms="9222" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify the data with invalid input"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate User Login"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:20:34 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:20:43 IST" duration-ms="8981" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify the data with invalid input"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate User Login"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:20:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:20:57 IST" duration-ms="14376" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.FailedTestRunner@623a8092]" started-at="2023-08-11T15:43:49 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-11T15:44:02 IST" duration-ms="13233" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -243,43 +37,11 @@ at ✽.User Verify Employee Details Edited Successfully(file:///C:/Users/Nimap/e
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:20:57 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:21:11 IST" duration-ms="13372" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify Sign In With OTP"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate User Login"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:21:11 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-10T16:21:20 IST" duration-ms="8974" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Verify Sign In With OTP Invalid"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Verify and Validate User Login"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestNGTestRunner@623a8092]" started-at="2023-08-10T16:21:20 IST" name="tearDownClass" finished-at="2023-08-10T16:21:21 IST" duration-ms="1081" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.FailedTestRunner@623a8092]" started-at="2023-08-11T15:44:02 IST" name="tearDownClass" finished-at="2023-08-11T15:44:03 IST" duration-ms="629" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
-      </class> <!-- cucumberOptions.TestNGTestRunner -->
+      </class> <!-- cucumberOptions.FailedTestRunner -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
