@@ -40,15 +40,11 @@ public class UserLoginStepDefinition extends BaseTest {
 	Actions a;
 	int rows;
 
+	private final TestContextSetup testContextSetup;
 
-	public UserLoginStepDefinition(TestContextSetup tcs) {
-		this.tcs = tcs;
-//		DP = tcs.pageObjectManager.getDashboardPage();
-//		LP = tcs.pageObjectManager.getLandingPage();
-//		CL = tcs.pageObjectManager.getLoginPage();
-//		UE = tcs.pageObjectManager.getUserEmployeeListPage();
-//		EL = tcs.pageObjectManager.getUser_EmployeeListPage();
-	}
+    public UserLoginStepDefinition(TestContextSetup testContextSetup) {
+        this.testContextSetup = testContextSetup;
+    }
 
 //	@Given("User Initialize The Browser")
 //	public void user_initialize_the_browser() {
@@ -56,18 +52,18 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
-		driver = initializeDriver();
-		CL = new LoginPage(driver);
-		LP = new LandingPage(driver);
-		UE = new UserEmployeeListPage(driver);
-		DP = new DashboardPage(driver);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		a = new Actions(driver);
+		testContextSetup.driver = initializeDriver();
+		CL = new LoginPage(testContextSetup.driver);
+		LP = new LandingPage(testContextSetup.driver);
+		UE = new UserEmployeeListPage(testContextSetup.driver);
+		DP = new DashboardPage(testContextSetup.driver);
+		wait = new WebDriverWait(testContextSetup.driver, Duration.ofSeconds(10));
+		a = new Actions(testContextSetup.driver);
 	}
 
 	@And("User enter a credential {string} {string}")
 	public void user_enter_a_credential(String Username, String Password) {
-		CL = new LoginPage(driver);
+		CL = new LoginPage(testContextSetup.driver);
 		CL.getEmpId().sendKeys(Username);
 		CL.getEmpPwd().sendKeys(Password);
 	}
@@ -98,8 +94,8 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@And("User Currently is on Login Page")
 	public void user_currently_is_on_login_page() throws IOException {
-		driver.get(goToNttsPage());
-		String url = driver.getCurrentUrl();
+		testContextSetup.driver.get(goToNttsPage());
+		String url = testContextSetup.driver.getCurrentUrl();
 		try {
 			Assert.assertEquals(url, prop.getProperty("url") + "login");
 		} catch (Exception e) {
@@ -110,7 +106,7 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@When("^User enter valid and invalid credential (.*) (.*)$")
 	public void user_enter_valid_and_invalid_credential(String Username, String Password) throws InterruptedException {
-		CL = new LoginPage(driver);
+		CL = new LoginPage(testContextSetup.driver);
 		CL.getEmpId().clear();
 		CL.getEmpId().sendKeys(Username);
 		CL.getEmpPwd().clear();
@@ -148,7 +144,7 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@Then("Close The Browser")
 	public void close_the_browser() {
-		driver.close();
+		testContextSetup.driver.close();
 	}
 
 	@When("User clicks on forgot password link")
@@ -229,10 +225,10 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@When("User Clicks on Dashboard Menu")
 	public void user_clicks_on_dashboard_menu() {
-		LP = new LandingPage(driver);
-		DP = new DashboardPage(driver);
+		LP = new LandingPage(testContextSetup.driver);
+		DP = new DashboardPage(testContextSetup.driver);
 		LP.goDashboard().click();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(testContextSetup.driver, Duration.ofSeconds(10));
 	}
 
 	@When("User Select Highlited Date as a Start Date in Calander")
@@ -255,7 +251,7 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@When("User is on Home Page {string} {string}")
 	public void user_is_on_home_page(String Username, String Password) {
-		driver.get(goToNttsPage());
+		testContextSetup.driver.get(goToNttsPage());
 		CL.getEmpId().sendKeys(Username);
 		CL.getEmpPwd().sendKeys(Password);
 		CL.getSignInBtn().click();
@@ -337,7 +333,7 @@ public class UserLoginStepDefinition extends BaseTest {
 
 	@When("User Clicks on Masters Menu and Select Employee Sub Menu")
 	public void user_clicks_on_masters_menu_and_select_employee_sub_menu() {
-		EL = new User_EmployeeListPage(driver);
+		EL = new User_EmployeeListPage(testContextSetup.driver);
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getMastersMenu()));
 		EL.getMastersMenu().click();
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getUserMenu()));
@@ -358,7 +354,7 @@ public class UserLoginStepDefinition extends BaseTest {
 	@Then("User Scroll Down and Clicks on Show First {int} Entries")
 	public void user_scroll_down_and_clicks_on_show_first_entries(Integer int1) throws InterruptedException {
 		Thread.sleep(3000);
-		js = (JavascriptExecutor) driver;
+		js = (JavascriptExecutor) testContextSetup.driver;
 		js.executeScript("window.scrollBy(0,250)");
 		rows = EL.getEmpNames().size();
 		System.out.println("No of Rows Before Pagenation in Employee List : " + rows);
