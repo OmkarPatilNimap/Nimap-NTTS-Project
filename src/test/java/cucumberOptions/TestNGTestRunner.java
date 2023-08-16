@@ -2,6 +2,7 @@ package cucumberOptions;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import nimap.ntts.stepDefinitions.MastersEmployeeStepDefinition;
 import nimap.ntts.stepDefinitions.UserLoginStepDefinition;
 import nimap.ntts.testComponents.TestContextSetup;
 
@@ -12,6 +13,7 @@ public class TestNGTestRunner extends AbstractTestNGCucumberTests {
 
 	private final TestContextSetup testContextSetup = new TestContextSetup();
 	private final UserLoginStepDefinition userLoginStepDefinition = new UserLoginStepDefinition(testContextSetup);
+	//private final MastersEmployeeStepDefinition mastersEmployeeStepDefinition = new MastersEmployeeStepDefinition(testContextSetup);
 
 //	@Override
 //	@DataProvider(parallel=true)

@@ -1,6 +1,6 @@
-Feature: Verify and Validate Masters Employee
+Feature: Verify and Validate Masters Employee Module
 
-		@EmployeeListVerificationTest
+		@EmployeeListVerificationTest @Smoke
 	Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
    Given User select the browser
     And User Currently is on Login Page
@@ -13,7 +13,7 @@ Feature: Verify and Validate Masters Employee
     Then Verify The Employee Detais Are The Same As Selected Employee
     Then Close The Browser
     
-    @EmployeeListVerificationTest
+    @EmployeeListVerificationTest @Regression
 	Scenario: Verify Empplyee List when User Clicks on First Employee then User Will Redirect to Selected Employee Details Page
    Given User select the browser
     And User Currently is on Login Page
@@ -26,7 +26,7 @@ Feature: Verify and Validate Masters Employee
     And User Scroll Up and Verify The 25 Rows Are Loaded in Employee List
     Then Close The Browser
     
-     @EmployeeListVerificationTest
+     @EmployeeListVerificationTest @Regression
 	Scenario: Verify Empplyee List when User Clicks on Active Employee Slider and User Verify Existing Employee is Available in List
    Given User select the browser
     And User Currently is on Login Page
@@ -39,7 +39,7 @@ Feature: Verify and Validate Masters Employee
     And Only one Search Entry is Available Verify the Actual Searched Name With Available Employee Search Name
     Then Close The Browser
     
-    @EmployeeListVerificationTest  
+    @EmployeeListVerificationTest @Regression @Smoke
   Scenario: Verify when User Add New Employee
    Given User select the browser
     And User Currently is on Login Page
@@ -53,7 +53,7 @@ Feature: Verify and Validate Masters Employee
     And User Clicks on Add New Employee button
     Then Close The Browser
     
-    @EmployeeListVerificationTest
+    @EmployeeListVerificationTest @Regression
   Scenario: Verify when User Apply Filter Condition
    Given User select the browser
     And User Currently is on Login Page
@@ -67,7 +67,7 @@ Feature: Verify and Validate Masters Employee
     And User Verify the Filter Condition is Apply as per inputs Provided
     Then Close The Browser
     
-    @EmployeeListVerificationTest
+    @EmployeeListVerificationTest @Regression @Smoke
   Scenario: Verify User Can Edit and Save Employee Details
    Given User select the browser
     And User Currently is on Login Page
@@ -82,7 +82,7 @@ Feature: Verify and Validate Masters Employee
     And User Verify Employee Details Edited Successfully
     Then Close The Browser
     
-    @EmployeeListVerificationTest
+    @EmployeeListVerificationTest @Regression @Smoke
   Scenario: Verify User Can Search, Delete Employee, and Verify Employee Deleted Successfully
    Given User select the browser
     And User Currently is on Login Page
@@ -95,7 +95,7 @@ Feature: Verify and Validate Masters Employee
     And User Search Newly Added Employee and Verify Employee Deleted Successfully
    Then Close The Browser
    
-   @EmployeeListVerificationTest
+   @EmployeeListVerificationTest @Regression
 	Scenario: Verify Empplyee List when User Clicks on Deleted Employee Slider and User Verify Deleted Employee Name is Available in List
    Given User select the browser
     And User Currently is on Login Page

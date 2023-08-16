@@ -6,7 +6,6 @@ import java.time.Duration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -20,25 +19,26 @@ import io.cucumber.java.en.When;
 import nimap.ntts.pageObjects.DashboardPage;
 import nimap.ntts.pageObjects.LandingPage;
 import nimap.ntts.pageObjects.LoginPage;
+import nimap.ntts.pageObjects.TopicPage;
 import nimap.ntts.pageObjects.UserEmployeeListPage;
 import nimap.ntts.pageObjects.User_EmployeeListPage;
 import nimap.ntts.testComponents.BaseTest;
 import nimap.ntts.testComponents.TestContextSetup;
 
 public class UserLoginStepDefinition extends BaseTest {
-	LoginPage CL;
-	LandingPage LP;
-	UserEmployeeListPage UE;
-	DashboardPage DP;
-	WebDriverWait wait;
-	TestContextSetup tcs;
-	JavascriptExecutor js;
-	User_EmployeeListPage EL;
-	String firstEmpName;
-	String firstEmpEmail;
-	String firstEmpStatus;
-	Actions a;
-	int rows;
+	private LoginPage CL;
+	private LandingPage LP;
+	private UserEmployeeListPage UE;
+	private DashboardPage DP;
+	private WebDriverWait wait;
+	private JavascriptExecutor js;
+	private User_EmployeeListPage EL;
+	private TopicPage TP;
+	private String firstEmpName;
+	private String firstEmpEmail;
+	private String firstEmpStatus;
+	private Actions a;
+	private int rows;
 
 	private final TestContextSetup testContextSetup;
 
@@ -336,8 +336,8 @@ public class UserLoginStepDefinition extends BaseTest {
 		EL = new User_EmployeeListPage(testContextSetup.driver);
 		wait.until(ExpectedConditions.elementToBeClickable(EL.getMastersMenu()));
 		EL.getMastersMenu().click();
-		wait.until(ExpectedConditions.elementToBeClickable(EL.getUserMenu()));
-		EL.getUserMenu().click();
+		wait.until(ExpectedConditions.elementToBeClickable(EL.getEmployeeMenu()));
+		EL.getEmployeeMenu().click();
 	}
 
 	@Then("Open Employee List Page")
@@ -597,4 +597,7 @@ public class UserLoginStepDefinition extends BaseTest {
 		Assert.assertEquals(availableName, actualSearchedName);
 	}
 
+	// ================================ Masters >> Topic ================================
+	
+	
 }

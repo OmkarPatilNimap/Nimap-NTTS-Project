@@ -55,9 +55,9 @@ public class User_EmployeeListPage extends PageComponents {
 	}
 	
 	@FindBy(css = "a[href='/apps/master/user']")
-	private WebElement userMenu;
-	public WebElement getUserMenu() {
-		return userMenu;
+	private WebElement empMenu;
+	public WebElement getEmployeeMenu() {
+		return empMenu;
 	}
 	
 	@FindBy(xpath = "//div[@class='sc-fqkvVR sc-dcJsrY sc-iGgWBj ffYoNC bfnFLK brkkzl rdt_TableCell'] [1]")
