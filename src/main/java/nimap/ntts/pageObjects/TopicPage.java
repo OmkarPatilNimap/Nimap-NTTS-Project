@@ -19,7 +19,7 @@ public class TopicPage extends PageComponents{
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath = "//a[@class='d-flex align-items-center active']")
+	@FindBy(css = "a[href='/apps/master/topic']")
 	private WebElement topicMenu;
 	public WebElement getTopicMenu() {
 		return topicMenu;

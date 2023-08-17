@@ -33,7 +33,6 @@ public class UserLoginStepDefinition extends BaseTest {
 	private WebDriverWait wait;
 	private JavascriptExecutor js;
 	private User_EmployeeListPage EL;
-	private TopicPage TP;
 	private String firstEmpName;
 	private String firstEmpEmail;
 	private String firstEmpStatus;
@@ -46,13 +45,9 @@ public class UserLoginStepDefinition extends BaseTest {
         this.testContextSetup = testContextSetup;
     }
 
-//	@Given("User Initialize The Browser")
-//	public void user_initialize_the_browser() {
-//	}
-
 	@Given("User select the browser")
 	public void user_select_the_browser() throws IOException {
-		testContextSetup.driver = initializeDriver();
+		testContextSetup.driver = launchApplication();
 		CL = new LoginPage(testContextSetup.driver);
 		LP = new LandingPage(testContextSetup.driver);
 		UE = new UserEmployeeListPage(testContextSetup.driver);

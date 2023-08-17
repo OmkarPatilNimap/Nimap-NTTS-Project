@@ -34,11 +34,11 @@ public class BaseTest {
 				+ "\\src\\main\\java\\nimap\\ntts\\resources\\AddNewEmployeeDetails.properties");
 		prop1.load(fis1);
 		String browserName = prop.getProperty("browser");
-		
+
 		prop2 = new Properties();
-		FileInputStream fis2 = new FileInputStream(System.getProperty("user.dir")
-				+ "\\src\\main\\java\\nimap\\ntts\\resources\\AddNewTopic.properties");
-		prop1.load(fis2);
+		FileInputStream fis2 = new FileInputStream(
+				System.getProperty("user.dir") + "\\src\\main\\java\\nimap\\ntts\\resources\\AddNewTopic.properties");
+		prop2.load(fis2);
 
 		if (driver == null) {
 			if (browserName.equalsIgnoreCase("chrome")) {
